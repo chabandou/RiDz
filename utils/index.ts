@@ -32,7 +32,6 @@ export async function generateCarID(car: CarProps) {
     "daefd14b-9f2b-4968-9e4d-9d4bb4af01d1"
   );
 
-  console.log(carIDUrl.href);
   
 
   const IDResponse = await fetch(carIDUrl.href, {

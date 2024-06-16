@@ -36,7 +36,6 @@ useEffect(() => {
     const url4 = await generateCarImageUrl(car, "119");
     setImageUrl([url, url2, url3, url4]);
   };
-  console.log(imageUrl);
 
   fetchImageUrl();
 }, []);

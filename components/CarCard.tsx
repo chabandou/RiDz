@@ -28,7 +28,6 @@ export default function CarCard({ car }: CarCardProps) {
     fetchImageUrl();
   }, []);
 
-  // console.log(imageUrl)
 
   const carPrice = city_mpg * (year / 2005 + 1) * 1000;
 
