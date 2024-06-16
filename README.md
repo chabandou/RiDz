@@ -10,10 +10,6 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 <p align="center">
  <a href="#books-subjects">Subjects</a> • 
  <a href="#desktop_computer-demonstration">Demonstration</a> •
- <a href="#building_construction-structure">
-  Structure
- </a> •
- <a href="#clipboard-validations">Validations</a> •
  <a href="#woman_technologist-achievements-difficulties-and-improvements">
   Achievements, difficulties and improvements
  </a>
