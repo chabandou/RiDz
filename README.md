@@ -28,8 +28,9 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## :desktop_computer: Demonstration
 <h3 align="center">
-Try it [here](https://ri-dz.vercel.app/).
+ <a href="https://ri-dz.vercel.app/">Try it out</a> • 
 </h3>
+
 ![RiDz](public/download.png)
                                         |
 
