@@ -32,7 +32,6 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 </h3>
 
 ![RiDz](public/download.png)
-                                        |
 
 ## :man_technologist: Achievements, difficulties and improvements
 
