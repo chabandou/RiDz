@@ -27,8 +27,9 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 - Node.js (Backend)
 
 ## :desktop_computer: Demonstration
-
+<h3 align="center">
 Try it [here](https://ri-dz.vercel.app/).
+</h3>
 ![RiDz](public/download.png)
                                         |
 
