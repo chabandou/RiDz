@@ -13,7 +13,7 @@ export default function ShowMore({pageNumber, isNext}: ShowMoreProps) {
     return (
         <div className="w-full flex-center gap-5 mt-10">
             {!isNext && (
-                <CustomButton title="Afficher plus" btnType="button" containerStyles="bg-primary-blue text-white rounded-full" handleClick={handleNavigation} />
+                <CustomButton title="Afficher plus" btnType="button" containerStyles="bg-[#058c42ff] text-white rounded-full" handleClick={handleNavigation} />
             )}
         </div>
     );
