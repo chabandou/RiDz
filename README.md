@@ -31,7 +31,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
  <a href="https://ri-dz.vercel.app/">Try it out</a> • 
 </h3>
 
-![RiDz](public/download.png)
+![RiDz](public/download2.png)
 
 ## :man_technologist: Achievements, difficulties and improvements
 
