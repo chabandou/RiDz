@@ -83,7 +83,7 @@ useEffect(() => {
                     />
                   </button>
                   <div className="flex-1 flex flex-col gap-3">
-                    <div className="relative w-full h-40 rounded-lg bg-pattern bg-cover bg-center">
+                    <div className="relative w-full h-40 bg-cover bg-center border-b-[3px] border-[#058c42ff]">
                       { imageUrl[0] && <Image
                         src={imageUrl[0]}
                         alt="car model"
@@ -93,8 +93,8 @@ useEffect(() => {
                         className="object-contain"
                       />}
                     </div>
-                    <div className="flex gap-3">
-                      <div className="flex-1 relative w-full h-24 rounded-lg bg-primary-blue-100">
+                    <div className="flex gap-3 border-b-[3px] border-[#058c42ff] pb-2">
+                      <div className="flex-1 relative w-full h-24 rounded-lg">
                         { imageUrl[1] && <Image
                           src={imageUrl[1]}
                           alt="car model"
@@ -103,7 +103,7 @@ useEffect(() => {
                           className="object-contain"
                         />}
                       </div>
-                      <div className="flex-1 relative w-full h-24 rounded-lg bg-primary-blue-100">
+                      <div className="flex-1 relative w-full h-24 rounded-lg">
                         { imageUrl[2] && <Image
                           src={imageUrl[2]}
                           alt="car model"
@@ -112,7 +112,7 @@ useEffect(() => {
                           className="object-contain"
                         />}
                       </div>
-                      <div className="flex-1 relative w-full h-24 rounded-lg bg-primary-blue-100">
+                      <div className="flex-1 relative w-full h-24 rounded-lg">
                         { imageUrl[3] && <Image
                           src={imageUrl[3]}
                           alt="car model"
@@ -131,7 +131,7 @@ useEffect(() => {
                       {Object.entries(car).map(([key, value]) => (
                         <div key={key} className="flex justify-between gap-5 w-full text-right border-b-2 border-black-100 border-opacity-15">
                             <h4 className="text-grey font-semibold capitalize">{key.split("_").join(" ")}:</h4> 
-                            <p className="text-primary-blue font-extrabold text-[18px] capitalize">{value}</p>
+                            <p className="text-[#058c42ff] font-extrabold text-[18px] capitalize">{value}</p>
                         </div>
                       ))}
                     </div>

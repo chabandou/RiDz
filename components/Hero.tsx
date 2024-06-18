@@ -9,7 +9,7 @@ export default function Hero() {
     <div className="hero">
       <div className="flex-1 pt-36 padding-x">
         <h1 className="hero__title">
-          Restez à jour sur les voitures dans l'Algerie!
+          Restez à jour sur les voitures dans <span className="Algeria">l'Algerie!</span>
         </h1>
         <p className="hero__subtitle">
           Rationalisez votre expérience d'achat de voiture grâce à notre
@@ -17,7 +17,7 @@ export default function Hero() {
         </p>
         <CustomButton
           title="Explorez les Voitures"
-          containerStyles="bg-primary-blue text-white rounded-full mt-10"
+          containerStyles="bg-[#058c42ff] text-white rounded-full mt-10"
           handleClick={handleScroll}
         />
       </div>

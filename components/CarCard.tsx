@@ -101,7 +101,7 @@ export default function CarCard({ car }: CarCardProps) {
         <div className="car-card__btn-container">
           <CustomButton
             title="Afficher plus"
-            containerStyles="w-full py-[16px] rounded-full bg-primary-blue"
+            containerStyles="w-full py-[16px] rounded-full bg-[#058c42ff]"
             textStyles="text-white text-[14px] font-bold leading-[17px]"
             rightIcon="/right-arrow.svg"
             handleClick={() => {
