@@ -22,9 +22,9 @@ export default async function News({}) {
 
   //   console.log(featuredPosts);
   return (
-    <section className="flex flex-col items-center justify-center max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-2 gap-10">
+    <section className="">
       <Carousel featuredPosts={featuredPosts} />
-      <div className="">
+      <div className="flex flex-col items-center justify-center max-w-[1920px] mx-auto sm:px-16 px-6 mt-2 gap-10">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {posts.results.map((post) => (
             // console.log(post.properties.Tags),
