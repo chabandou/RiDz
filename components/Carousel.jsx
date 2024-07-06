@@ -33,12 +33,6 @@ export default function Carousel({ featuredPosts }) {
   const touchEndX = useRef(0);
   const threshold = 50; // Minimum swipe distance
 
-  const options = [
-    { id: "option1", label: "Option 1", value: "0" },
-    { id: "option2", label: "Option 2", value: "1" },
-    { id: "option3", label: "Option 3", value: "2" },
-    { id: "option3", label: "Option 3", value: "3" },
-  ];
 
   const handleTouchStart = (e) => {
     touchStartX.current = e.changedTouches[0].screenX;
@@ -63,7 +57,7 @@ export default function Carousel({ featuredPosts }) {
   };
 
   const checkRadio = (index) => {
-    if (index >= 0 && index < options.length) {
+    if (index >= 0 && index < featuredPosts.length) {
       setSelected(index);
     }
   };
@@ -168,7 +162,7 @@ export default function Carousel({ featuredPosts }) {
                   </div>
                   <h1
                     className={clsx(
-                      " text-[3rem] lg:text-[6rem] font-bold capitalize tracking-normal opacity-90 lg:translate-y-[0] ",
+                      " text-[3rem] lg:text-[4rem] xl:text-[5rem] 2xl:text-[6rem] font-bold capitalize tracking-normal opacity-90 lg:translate-y-[0] ",
                       arefRuqaa.className
                     )}
                   >
