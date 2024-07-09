@@ -7,7 +7,7 @@ import Link from "next/link";
 import { ArrowLeft, MoveLeft } from "lucide-react";
 import { arefRuqaa } from "@/app/fonts";
 
-export default function Carousel({ featuredPosts }) {
+export default function Hero({ featuredPosts }) {
   useEffect(() => {
     let radios = document.querySelectorAll('input[name="slider"]');
     let currentIndex = 0;
@@ -32,7 +32,6 @@ export default function Carousel({ featuredPosts }) {
   const touchStartX = useRef(0);
   const touchEndX = useRef(0);
   const threshold = 50; // Minimum swipe distance
-
 
   const handleTouchStart = (e) => {
     touchStartX.current = e.changedTouches[0].screenX;
@@ -122,7 +121,7 @@ export default function Carousel({ featuredPosts }) {
             return (
               <div
                 key={post.id}
-                className={`box ${post.id} bg-cover bg-no-repeat bg-top flex items-end justify-start max-h-[70vh] translate-y-[0vh] lg:max-h-[115vh] lg:translate-y-[0vh]`}
+                className={`box ${post.id} bg-cover bg-no-repeat bg-center flex items-end justify-start max-h-[70vh] translate-y-[0vh] lg:max-h-[115vh] lg:translate-y-[0vh]`}
                 style={{ backgroundImage: `url(${post.cover?.external.url})` }}
                 onTouchStart={handleTouchStart}
                 onTouchEnd={(e) => handleTouchEnd(e, index)}
@@ -134,7 +133,7 @@ export default function Carousel({ featuredPosts }) {
                 >
                   <div className="flex justify-between items-center">
                     <div className="flex gap-2">
-                      {postTags.map(
+                      {postTags.slice(0, 3).map(
                         (tag) =>
                           tagThings[tag] && (
                             <div
@@ -174,7 +173,7 @@ export default function Carousel({ featuredPosts }) {
                     </p>
                   </div>
                   <Link
-                    href={`/news/${post.properties.slug.rich_text[0].plain_text}`}
+                    href={`/news/${post.properties.Slug.rich_text[0].plain_text}`}
                     className="flex gap-3 items-center justify-center group m-2 lg:mt-0"
                   >
                     <div className="w-[3.5rem] h-[3.5rem] bg-slate-500 bg-opacity-60 opacity-80 rounded-full p-3 group-hover:bg-green-600 group-hover:opacity-100 transition duration-300 ease-in flex items-center justify-center">

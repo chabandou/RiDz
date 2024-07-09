@@ -1,60 +1,108 @@
 
-import "swiper/css";
-import "swiper/css/navigation";
 import {
-    Card,
-    CardContent,
-    CardFooter,
-    CardHeader,
-    CardTitle,
-  } from "@/components/ui/card";
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import Link from "next/link";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "./ui/carousel";
+import { Book } from "lucide-react";
 
-export default function Selection({ selectionPosts }) {
-
-    return (
-        <div className="Selections-section flex flex-col items-center justify-center mx-auto sm:px-16 px-6 mt-2 gap-10 w-full mb-4">
-        <div className="flex items-center justify-start w-full border-r-8 border-primary pr-3">
+export default async function Selection({ selectionPosts }) {
+  return (
+    <div className="Selections-section relative flex flex-col items-center justify-center mx-auto sm:px-16 px-6 mt-2 gap-10 w-full mb-4">
+      <Carousel
+        opts={{
+          loop: true,
+          direction: "rtl",
+          align: "center",
+          breakpoints: {
+            "(min-width: 1024px)": { align: "start" },
+          },
+        }}
+        className=" max-w-full xl:w-full mx-auto space-y-8"
+      >
+        <div className="flex relative items-center justify-start w-full border-r-8 border-primary pr-3">
           <h2 className="text-3xl font-bold text-right leading-[2.5rem]">
-            مُختارات
+            مُختارات 
           </h2>
+          <CarouselNext className="hidden lg:flex left-0 top-0 translate-x-12" />
+          <CarouselPrevious className="hidden lg:flex left-0 top-0" />
         </div>
-        <div className="mySwipper flex justify-between items-center gap-5 w-full">
-          {selectionPosts.map((post) => (
-            // console.log(post.properties.Tags),
-            <Card
-              key={post.id}
-              className="flex items-center justify-center rounded-lg overflow-hidden shadow-2xl h-[350px] w-1/5"
+        <CarouselContent>
+          {selectionPosts.map((post, index) => (
+            <CarouselItem
+              key={index}
+              className="basis-[80%] lg:basis-[33%] xl:basis-[20%]"
             >
-              <div
-                className="card-body bg-cover bg-center text-white h-full w-full"
-                style={{
-                  backgroundImage:
-                    `url(${post.cover?.external.url})` || "/car_3tww.png",
-                }}
-              >
-                <Link
-                  href={`/news/${post.properties.slug.rich_text[0].plain_text}`}
-                  className=" w-full h-full"
+              <div className="">
+                <Card
+                  key={post.id}
+                  className="flex items-center justify-center rounded-lg overflow-hidden shadow-2xl h-[350px] w-full"
                 >
-                  <div className="bg-gradient-to-t from-[#000000] to-80% flex flex-col justify-center h-full w-full transition-all duration-300 ">
-                    <CardHeader className="flex flex-col justify-between items-start h-full">
-                      <div className="bg-slate-500 bg-opacity-10 backdrop-blur-sm border border-white border-opacity-45 text-white text-xs px-2 py-1 lg:text-sm lg:px-4 lg:py-2 rounded-full flex items-center gap-2 w-fit">
-                        <span className="{tag}">Tag</span>
-                      </div>
+                  <div
+                    className="card-body bg-cover bg-center text-white h-full w-full"
+                    style={{
+                      backgroundImage:
+                        `url(${post.cover?.external.url})` || "/car_3tww.png",
+                    }}
+                  >
+                    <Link
+                      href={`/news/${post.properties.Slug.rich_text[0].plain_text}`}
+                      className=" w-full h-full"
+                    >
+                      <div className="bg-gradient-to-t from-[#000000] to-80% flex flex-col justify-center h-full w-full transition-all duration-300 ">
+                        <CardHeader className="flex flex-col justify-between items-start h-full">
+                          <div className="bg-slate-500 bg-opacity-10 backdrop-blur-sm border border-white border-opacity-45 text-white text-xs px-2 py-1 lg:text-sm lg:px-4 lg:py-2 rounded-full flex items-center gap-2 w-fit">
+                            <span className="{tag} capitalize">
+                              {
+                                post.properties.Tags.multi_select.filter(
+                                  (tag) =>
+                                    tag.name !== "selection" &&
+                                    tag.name !== "featured" &&
+                                    tag.name !== "cars" &&
+                                    tag.name !== "new"
+                                )[0].name
+                              }
+                            </span>
+                          </div>
 
-                      <CardTitle className="leading-7">
-                        {post.properties.Title.title[0].plain_text}
-                      </CardTitle>
-                    </CardHeader>
-                    {/* <CardContent className="w-[80%] ">
+                          <CardTitle className="leading-7">
+                            {post.properties.Title.title[0].plain_text}
+                          </CardTitle>
+                        </CardHeader>
+                      </div>
+                    </Link>
+                  </div>
+                </Card>
+              </div>
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+      </Carousel>
+    </div>
+  );
+}
+
+{
+  /* <CardContent className="w-[80%] ">
                     <p className="line-clamp-2">
                       {post.properties.Description.rich_text[0].plain_text}
                     </p>
-                  </CardContent> */}
-                    {/* <CardFooter>
+                  </CardContent> */
+}
+{
+  /* <CardFooter>
                     <Link
-                      href={`/news/${post.properties.slug.rich_text[0].plain_text}`}
+                      href={`/news/${post.properties.Slug.rich_text[0].plain_text}`}
                     >
                       <Button
                         className="group rounded-full bg-transparent hover:text-green-400 hover:bg-black hover:bg-opacity-10 "
@@ -66,13 +114,5 @@ export default function Selection({ selectionPosts }) {
                         </span>{" "}
                       </Button>
                     </Link>
-                  </CardFooter> */}
-                  </div>
-                </Link>
-              </div>
-            </Card>
-          ))}
-        </div>
-      </div>
-    )
+                  </CardFooter> */
 }
