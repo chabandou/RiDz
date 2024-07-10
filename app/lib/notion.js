@@ -31,7 +31,7 @@ export const fetchBySlug = React.cache((slug) => {
   .then((res) => res.results[0])
 }) 
 
-export const fetchByTag = React.cache((tag) => {
+export const fetchByTag = React.cache((tag, offset = undefined) => {
   return notion.databases.query({
     database_id: process.env.NOTION_DATABASE_ID,
     filter: {
@@ -39,7 +39,10 @@ export const fetchByTag = React.cache((tag) => {
       multi_select: {
         contains: tag
       }
-    }
+    },
+    start_cursor: offset,
+    page_size: 100,
+    
   })
   .then((res) => res.results)
 })
