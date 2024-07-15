@@ -5,13 +5,13 @@ import BlogHealineCard from "./BlogHealineCard";
 import { Button } from "./ui/button";
 import clsx from "clsx";
 
-export default function AllNewsHeadlines({ posts }) {
+export default function AllNewsHeadlines({ posts, title }) {
   const [offset, setOffset] = useState(0);
   return (
     <div className="col-span-2 flex flex-col items-start justify-center gap-8">
       <div className="flex  items-center justify-start w-full border-r-8 border-primary pr-3">
         <h2 className="text-3xl font-bold text-right leading-[2.5rem]">
-          كل الأخبار
+          {title}
         </h2>
       </div>
       <div className="w-full space-y-10 max-h-[332vh] min-h-[85vh]">
@@ -23,8 +23,9 @@ export default function AllNewsHeadlines({ posts }) {
         <Button
           className="rounded-lg"
           onClick={() => {
-            if (offset > 0) setOffset(offset - 10);
+            if (offset > 0) setOffset((prvOffset) => (prvOffset - 10));
           }}
+          disabled={offset === 0}
         >
           الصفحة السابقة
         </Button>
@@ -35,11 +36,12 @@ export default function AllNewsHeadlines({ posts }) {
               "bg-white text-green-700 border-2 border-green-700 hover:text-white": offset === i * 10,
             })}
             onClick={() => setOffset(i * 10)}
+            disabled={offset === i * 10}
           >
             {i + 1}
           </Button>
         ))}
-        <Button className="rounded-lg" onClick={() => setOffset(offset + 10)}>
+        <Button className="rounded-lg" onClick={() => setOffset((prvOffset) => prvOffset + 10)} disabled={posts.length <= offset + 10}>
           الصفحة التالية 
         </Button>
       </div>

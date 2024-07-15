@@ -11,7 +11,7 @@ export default async function allNews() {
   return (
     <main className="flex flex-col gap-12 max-w-[1920px] px-6 " dir="rtl">
       <section className="Latest-section relative grid grid-cols-1 lg:grid-cols-3 mx-auto sm:px-16 px-6 mt-2 w-full mb-4">
-        <AllNewsHeadlines posts={posts} />
+        <AllNewsHeadlines posts={posts} title="كل الأخبار" />
 
         <div className="flex items-start justify-start flex-col gap-8 h-[95vh] bg-gradient-to-b from-[#15803cdc] to-[#059668e0] rounded-lg p-6 text-white border-white border-spacing-7 inset-4">
           <div className="w-full flex items-start justify-center gap-2">

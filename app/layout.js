@@ -2,6 +2,7 @@ import { Inter } from "next/font/google";
 import { notoKufiArabic } from "@/app/fonts";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 
 
@@ -20,6 +21,7 @@ export default function RootLayout({ children }) {
       <body className={notoKufiArabic.className}>
         <Navbar />
         {children}
+        <Footer />
       </body>
     </html>
   );

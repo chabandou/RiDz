@@ -15,17 +15,17 @@ export default function BlogHealineCard({ post, className }) {
   const postDate = new Date(post.properties.Date.created_time);
   return (
     <div className={`headline-card flex justify-start items-center h-1/6  ${className}`}>
-      <div className="w-1/3 overflow-hidden rounded-lg">
+      <div className="w-1/3 h-full overflow-hidden rounded-lg">
         <Link
-          href={`/news/${post.properties.Slug.rich_text[0]?.plain_text}`}
-          className="hover:opacity-80 transition-all duration-300"
+          href={`/news/article/${post.properties.Slug.rich_text[0]?.plain_text}`}
+          className=" w-full h-full  hover:opacity-80 transition-all  duration-300"
         >
           <Image
             src={post.cover?.external?.url || "/car_3tww.png"}
             width={300}
             height={300}
             alt="car"
-            className="w-full"
+            className="w-full h-full object-cover object-center"
           />
         </Link>
       </div>
@@ -33,7 +33,7 @@ export default function BlogHealineCard({ post, className }) {
         <CardHeader className="space-y-8 pt-0">
           <CardTitle>
             <Link
-              href={`/news/${post.properties.Slug.rich_text[0]?.plain_text}`}
+              href={`/news/article/${post.properties.Slug.rich_text[0]?.plain_text}`}
               className="hover:text-green-600 transition-all duration-300"
             >
               {post.properties.Title.title[0]?.plain_text}

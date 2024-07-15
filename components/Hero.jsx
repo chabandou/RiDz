@@ -173,7 +173,7 @@ export default function Hero({ featuredPosts }) {
                     </p>
                   </div>
                   <Link
-                    href={`/news/${post.properties.Slug.rich_text[0].plain_text}`}
+                    href={`/news/article/${post.properties.Slug.rich_text[0].plain_text}`}
                     className="flex gap-3 items-center justify-center group m-2 lg:mt-0"
                   >
                     <div className="w-[3.5rem] h-[3.5rem] bg-slate-500 bg-opacity-60 opacity-80 rounded-full p-3 group-hover:bg-green-600 group-hover:opacity-100 transition duration-300 ease-in flex items-center justify-center">
