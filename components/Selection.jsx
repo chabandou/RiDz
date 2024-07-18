@@ -1,3 +1,4 @@
+import imageUrlBuilder from "@sanity/image-url";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import Link from "next/link";
 import {
@@ -9,6 +10,14 @@ import {
 } from "./ui/carousel";
 import SectionHeader from "./ui/SectionHeader";
 import { tagThings } from "@/constants";
+
+const projectId = "chgbiwcm";
+const dataset = "production";
+const urlFor = (source) =>
+  projectId && dataset
+    ? imageUrlBuilder({ projectId, dataset }).image(source)
+    : null;
+
 
 export default async function Selection({ selectionPosts }) {
   return (
@@ -30,13 +39,20 @@ export default async function Selection({ selectionPosts }) {
         </SectionHeader>
         <CarouselContent>
           {selectionPosts.map((post, index) => {
-            const tag = post.properties.Tags.multi_select.filter(
+            const {_id, name, slug, tags, mainImage} = post
+            const articleImageUrl = mainImage
+            ? urlFor(mainImage)?.width(350).height(350).url()
+            : null;
+            const tag = tags.filter(
               (tag) =>
-                tag.name !== "selection" &&
-                tag.name !== "featured" &&
-                tag.name !== "cars" &&
-                tag.name !== "new"
-            )[0].name;
+                tag !== "selection" &&
+                tag !== "featured" &&
+                tag !== "cars" &&
+                tag !== "new" &&
+                tag !== "upcoming-events" &&
+                tag !== "news" &&
+                tag !== "essay"
+            )[0];
             return (
               <CarouselItem
                 key={index}
@@ -44,18 +60,18 @@ export default async function Selection({ selectionPosts }) {
               >
                 <div className="">
                   <Card
-                    key={post.id}
+                    key={_id}
                     className="flex items-center justify-center rounded-lg overflow-hidden shadow-2xl h-[350px] w-full"
                   >
                     <div
                       className="card-body bg-cover bg-center text-white h-full w-full"
                       style={{
                         backgroundImage:
-                          `url(${post.cover?.external.url})` || "/car_3tww.png",
+                          `url(${articleImageUrl})` || "/car_3tww.png",
                       }}
                     >
                       <Link
-                        href={`/news/article/${post.properties.Slug.rich_text[0].plain_text}`}
+                        href={`/news/article/${slug.current}`}
                         className=" w-full h-full"
                       >
                         <div className="bg-gradient-to-t from-[#000000] to-80% flex flex-col justify-center h-full w-full transition-all duration-300 ">
@@ -67,7 +83,7 @@ export default async function Selection({ selectionPosts }) {
                             </div>
 
                             <CardTitle className="leading-7">
-                              {post.properties.Title.title[0].plain_text}
+                              {name}
                             </CardTitle>
                           </CardHeader>
                         </div>
@@ -82,29 +98,4 @@ export default async function Selection({ selectionPosts }) {
       </Carousel>
     </div>
   );
-}
-
-{
-  /* <CardContent className="w-[80%] ">
-                    <p className="line-clamp-2">
-                      {post.properties.Description.rich_text[0].plain_text}
-                    </p>
-                  </CardContent> */
-}
-{
-  /* <CardFooter>
-                    <Link
-                      href={`/news/${post.properties.Slug.rich_text[0].plain_text}`}
-                    >
-                      <Button
-                        className="group rounded-full bg-transparent hover:text-green-400 hover:bg-black hover:bg-opacity-10 "
-                        variant="outline"
-                      >
-                        المزيد
-                        <span className="-translate-x-1 group-hover:-translate-x-2 transition-transform">
-                          &larr;
-                        </span>{" "}
-                      </Button>
-                    </Link>
-                  </CardFooter> */
 }

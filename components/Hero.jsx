@@ -1,13 +1,23 @@
 "use client";
 
+import imageUrlBuilder from "@sanity/image-url";
+
 import { useEffect, useRef, useState } from "react";
 import { tagThings } from "@/constants";
 import clsx from "clsx";
 import Link from "next/link";
 import { ArrowLeft, MoveLeft } from "lucide-react";
-import { arefRuqaa } from "@/app/fonts";
+import { arefRuqaa } from "@/app/(client)/fonts";
 
-export default function Hero({ featuredPosts }) {
+
+
+
+export default function Hero({ featuredPosts, projectId, dataset }) {
+  const urlFor = (source) =>
+    projectId && dataset
+      ? imageUrlBuilder({ projectId, dataset }).image(source)
+      : null;
+
   useEffect(() => {
     let radios = document.querySelectorAll('input[name="slider"]');
     let currentIndex = 0;
@@ -61,13 +71,15 @@ export default function Hero({ featuredPosts }) {
     }
   };
 
+  
+
   return (
     <div className="carousel-container shadow-2xl" dir="rtl">
       <div className="tabs max-h-full ">
         {featuredPosts.map((post, index) => (
           <input
-            key={post.id}
-            id={post.id}
+            key={post._id}
+            id={post._id}
             type="radio"
             name="slider"
             checked={selected === index}
@@ -76,7 +88,7 @@ export default function Hero({ featuredPosts }) {
         ))}
         <div className="buttons" dir="rtl">
           {featuredPosts.map((post, index) => (
-            <label key={post.id} htmlFor={post.id}>
+            <label key={post._id} htmlFor={post._id}>
               <div className="circle relative lg:flex-[1.3] w-[55px] ">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -106,7 +118,7 @@ export default function Hero({ featuredPosts }) {
               </div>
               <div className="hidden lg:flex lg:flex-[4]">
                 <span className=" font-semibold text-white opacity-85 text-lg line-clamp-2 ">
-                  {post.properties.Title.title[0].plain_text}
+                  {post.name}
                 </span>
               </div>
             </label>
@@ -114,26 +126,25 @@ export default function Hero({ featuredPosts }) {
         </div>
         <div className="content">
           {featuredPosts.map((post, index) => {
-            const postLang = post.properties.Language.select.name;
-            const postTags = post.properties.Tags.multi_select.map(
-              (tag) => tag.name
-            );
+            const postTags = post.tags.map((tag) => tag);
+            const articleImageUrl = post.mainImage
+            ? urlFor(post.mainImage)?.width(2560).height(1440).url()
+            : null;
             return (
               <div
                 key={post.id}
                 className={`box ${post.id} bg-cover bg-no-repeat bg-center flex items-end justify-start max-h-[70vh] translate-y-[0vh] lg:max-h-[115vh] lg:translate-y-[0vh]`}
-                style={{ backgroundImage: `url(${post.cover?.external.url})` }}
+                style={{ backgroundImage: `url(${articleImageUrl})` }}
                 onTouchStart={handleTouchStart}
                 onTouchEnd={(e) => handleTouchEnd(e, index)}
               >
                 <div className="overlay"></div>
                 <div
-                  dir={postLang === "Arabic" ? "rtl" : "ltr"}
                   className=" text-white w-full lg:w-[50%] rounded-lg p-6 flex flex-col justify-center items-start gap-2 lg:gap-6 text-right lg:mb-[9.3rem] z-10 translate-y-[19vh] lg:translate-y-0"
                 >
                   <div className="flex justify-between items-center">
                     <div className="flex gap-2">
-                      {postTags.slice(0, 3).map(
+                      {postTags.slice(0, 4).map(
                         (tag) =>
                           tagThings[tag] && (
                             <div
@@ -146,10 +157,8 @@ export default function Hero({ featuredPosts }) {
                               )}
                             >
                               <span className="{tag}">
-                                {postLang === "Arabic"
-                                  ? tagThings[tag]
-                                    ? tagThings[tag].translation
-                                    : tag
+                                {tagThings[tag]
+                                  ? tagThings[tag].translation
                                   : tag}
                               </span>
 
@@ -159,21 +168,26 @@ export default function Hero({ featuredPosts }) {
                       )}
                     </div>
                   </div>
-                  <h1
-                    className={clsx(
-                      " text-[3rem] lg:text-[4rem] xl:text-[5rem] 2xl:text-[6rem] font-bold capitalize tracking-normal opacity-90 lg:translate-y-[0] ",
-                      arefRuqaa.className
-                    )}
+                  <Link
+                    href={`/news/article/${post.slug.current}`}
+                    className=""
                   >
-                    {post.properties.Title.title[0].plain_text}
-                  </h1>
+                    <h1
+                      className={clsx(
+                        " text-[3rem] lg:text-[4rem] xl:text-[5rem] 2xl:text-[6rem] font-bold capitalize tracking-normal opacity-90 lg:translate-y-[0] ",
+                        arefRuqaa.className
+                      )}
+                    >
+                      {post.name}
+                    </h1>
+                  </Link>
                   <div className="hidden lg:block">
                     <p className=" text-xl line-clamp-2 opacity-80 ">
-                      {post.properties.Description.rich_text[0].plain_text}
+                      {post.description}
                     </p>
                   </div>
                   <Link
-                    href={`/news/article/${post.properties.Slug.rich_text[0].plain_text}`}
+                    href={`/news/article/${post.slug.current}`}
                     className="flex gap-3 items-center justify-center group m-2 lg:mt-0"
                   >
                     <div className="w-[3.5rem] h-[3.5rem] bg-slate-500 bg-opacity-60 opacity-80 rounded-full p-3 group-hover:bg-green-600 group-hover:opacity-100 transition duration-300 ease-in flex items-center justify-center">

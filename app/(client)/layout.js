@@ -1,5 +1,5 @@
 import { Inter } from "next/font/google";
-import { notoKufiArabic } from "@/app/fonts";
+import { notoKufiArabic } from "@/app/(client)/fonts";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";

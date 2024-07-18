@@ -21,14 +21,14 @@ export default function Footer() {
             All Rights Reserved &copy;
           </p>
         </div>
-        <div className="flex-1 w-full flex md:justify-end flex-wrap max-md:mt-10 gap-20">
+        <div className="flex-1 w-full flex flex-row-reverse  md:items-start md:justify-end flex-wrap max-md:mt-10 gap-20" dir="rtl">
           {footerLinks.map((link, index) => (
-            <div key={link.title} className="flex flex-col gap-6 text-base min-w-[170px] text-gray-100">
+            <div key={link.title} className="flex flex-col gap-6 text-base min-w-[170px] text-gray-100" dir="ltr" >
               <h3 className="font-bold">{link.title}</h3>
               {index === 2 && (
-                link.links.map((item) => (
+                link.links.map((item, index) => (
                     <span
-                      key={item.url}
+                      key={index}
                       href={item.url}
                       className=" text-gray-200 flex gap-2 items-center justify-start"
                     >
@@ -36,9 +36,9 @@ export default function Footer() {
                     </span>
                   ))
               )}
-              {index !== 2 && link.links.map((item) => (
+              {index !== 2 && link.links.map((item, index) => (
                 <Link
-                  key={item.url}
+                  key={index}
                   href={item.url}
                   className="hover:text-gray-100 group hover:underline text-gray-200 flex gap-2 items-center justify-start"
                 >

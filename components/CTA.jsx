@@ -76,7 +76,7 @@ export default function CTA() {
               emailRes === 200 && "hidden"
             )}
           >
-            <p className="text-lg lg:w-[75ch]  text-opacity-70 font-bold drop-shadow-[0_1px_1px_rgba(0,0,0,0.25)]">
+            <p className="text-xl lg:w-[75ch]  text-opacity-70 font-bold drop-shadow-[0_1px_1px_rgba(0,0,0,0.25)]">
               لتصلك آخر الأخبار المتعلقة بالسيارات الجزائرية مباشرة على صندوق
               بريدك الالكتروني سجل لتنظم إلى قائمة المتلقين
             </p>

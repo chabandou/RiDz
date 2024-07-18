@@ -14,16 +14,22 @@ export default function AllNewsHeadlines({ posts, title }) {
           {title}
         </h2>
       </div>
-      <div className="w-full space-y-10 max-h-[332vh] min-h-[85vh]">
+      <div className="w-full space-y-6 md:space-y-10 max-h-[332vh] min-h-[85vh]">
         {posts?.slice(offset, offset + 10).map((post, index) => {
-          return <BlogHealineCard key={index} post={post} className={"h-[8.3%] min-h-[200px]"}  />;
+          return (
+            <BlogHealineCard
+              key={index}
+              post={post}
+              className={"h-[8.3%] min-h-[200px]"}
+            />
+          );
         })}
       </div>
       <div className="w-full flex items-center justify-center gap-3 mt-12 mb-7">
         <Button
           className="rounded-lg"
           onClick={() => {
-            if (offset > 0) setOffset((prvOffset) => (prvOffset - 10));
+            if (offset > 0) setOffset((prvOffset) => prvOffset - 10);
           }}
           disabled={offset === 0}
         >
@@ -33,7 +39,8 @@ export default function AllNewsHeadlines({ posts, title }) {
           <Button
             key={i}
             className={clsx("rounded-lg ", {
-              "bg-white text-green-700 border-2 border-green-700 hover:text-white": offset === i * 10,
+              "bg-white text-green-700 border-2 border-green-700 hover:text-white":
+                offset === i * 10,
             })}
             onClick={() => setOffset(i * 10)}
             disabled={offset === i * 10}
@@ -41,8 +48,12 @@ export default function AllNewsHeadlines({ posts, title }) {
             {i + 1}
           </Button>
         ))}
-        <Button className="rounded-lg" onClick={() => setOffset((prvOffset) => prvOffset + 10)} disabled={posts.length <= offset + 10}>
-          الصفحة التالية 
+        <Button
+          className="rounded-lg"
+          onClick={() => setOffset((prvOffset) => prvOffset + 10)}
+          disabled={posts.length <= offset + 10}
+        >
+          الصفحة التالية
         </Button>
       </div>
     </div>
