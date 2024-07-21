@@ -70,7 +70,7 @@ export default async function TrendingHeadlines({articlePage = false}) {
             )}
             inView={true}
           >
-            <div className="w-1/6 h-full flex items-center justify-start">
+            <div className="w-1/6 h-full flex items-center justify-center">
               <span className={clsx(articlePage ? "sm:text-4xl" : "sm:text-5xl", "text-4xl trending-number font-bold drop-shadow-[0_1px_0px_rgba(0,0,0,0.5)] ")}>
                 #{index + 1}
               </span>

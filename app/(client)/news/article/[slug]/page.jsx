@@ -1,65 +1,20 @@
-// import { fetchBySlug, fetchPageBlocks, notion } from "@/app/lib/notion";
-// import bookmarkPlugin from "@notion-render/bookmark-plugin";
-// import { NotionRenderer } from "@notion-render/client";
-// import hljsPlugin from "@notion-render/hljs-plugin";
-// import clsx from "clsx";
-
-// export default async function Article({ params }) {
-//   const post = await fetchBySlug(params.slug);
-//   if (!post) return <div>404</div>;
-
-//   const blocks = await fetchPageBlocks(post.id);
-//   // console.log(blocks[0].heading_1);
-//   const renderer = new NotionRenderer({
-//     client: notion,
-//   });
-
-//   const postLang = post.properties.Language.select.name;
-//   // console.log(postLang);
-
-//   renderer.use(hljsPlugin({}));
-//   renderer.use(bookmarkPlugin(undefined));
-
-//   const html = await renderer.render(...blocks);
-
-//   // reading time logic
-//   const wordMatchRegExp = /(?<!<)([\u0600-\u06FF]+)(?!>)/g; // Regular expression
-//   const words = html.matchAll(wordMatchRegExp);
-//   const wordCount = [...words].length;
-//   console.log(wordCount);
-//   const readingTime = Math.round(wordCount / 200);
-
-//   await incrementVisitsMDB(params.slug);
-
-//   return (
-//     <main className="flex min-h-screen flex-col items-center justify-between p-24">
-//       <p className="text-right">⏱️ {readingTime} min read</p>
-//       <article
-//         className={clsx("prose mx-auto mt-10 text-right")}
-//         dangerouslySetInnerHTML={{ __html: html }}
-//         dir={postLang === "Arabic" ? "rtl" : "ltr"}
-//       ></article>
-//     </main>
-//   );
-// }
-
-import { PortableText } from "next-sanity";
 import imageUrlBuilder from "@sanity/image-url";
+import { PortableText } from "next-sanity";
 
-import Link from "next/link";
-import Image from "next/image";
-import { client, sanityFetch } from "@/app/sanity/client";
-import { connectToMongoDB } from "@/app/lib/mongodb";
-import Page from "@/models/pageVisits";
-import TrendingHeadlines from "@/components/TrendingHeadlines";
-import BlurFade from "@/components/magicui/blur-fade";
-import { footerLinks, tagThings } from "@/constants";
-import clsx from "clsx";
-import { Circle, Eye, MessageSquareText } from "lucide-react";
-import SocialMediaShare from "@/components/SocialMediaShare";
 import { arefRuqaa } from "@/app/(client)/fonts";
+import { connectToMongoDB } from "@/app/lib/mongodb";
+import { client, sanityFetch } from "@/app/sanity/client";
 import ReadingTime from "@/components/ReadingTime";
 import Selection from "@/components/Selection";
+import SocialMediaShare from "@/components/SocialMediaShare";
+import TrendingHeadlines from "@/components/TrendingHeadlines";
+import BlurFade from "@/components/magicui/blur-fade";
+import { tagThings } from "@/constants";
+import Page from "@/models/pageVisits";
+import clsx from "clsx";
+import { Circle, Eye, MessageSquareText } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
 
 async function incrementVisitsMDB(slug) {
   await connectToMongoDB("incrementVisits");
@@ -128,7 +83,7 @@ export default async function ArticlePage({ params }) {
 
   return (
     <>
-      <main className="" dir="rtl">
+      <main className="overflow-x-hidden" dir="rtl">
         <section className="container mx-auto grid gap-12 p-2">
           <div className="mb-1">
             <Link href="/news/all-news"> → العودة لكل الأخبار </Link>
@@ -138,32 +93,28 @@ export default async function ArticlePage({ params }) {
               <Image
                 src={articleImageUrl || "https://via.placeholder.com/1920x1080"}
                 alt={name || "article"}
-                className="mx-auto aspect-video h-[85vh] drop-shadow-lg scale-105 overflow-hidden rounded-xl object-cover object-center sm:w-full mb-8"
+                className="mx-auto aspect-video h-[33vh] xl:h-[85vh] drop-shadow-lg scale-105 overflow-hidden md:rounded-xl object-cover object-center sm:w-full mb-2 md:mb-8"
                 height="1080"
                 width="1920"
               />
-              <div className="grid grid-cols-4 gap-2">
-                <div className="article-title col-span-3 flex flex-col flex-wrap items-start justify-start gap-6">
-                  <BlurFade inView>
+              <div className="md:w-[75ch] grid grid-cols-1 xl:grid-cols-12 place-content-center gap-8 xl:gap-2 mx-auto">
+                <div className="article-title  xl:col-start-2 xl:col-span-7 flex flex-col flex-wrap items-start justify-start gap-2 ">
+                  <BlurFade inView className="text-sm xl:text-lg mb-2 xl:mb-0">
                     {articleDate && (
                       <dt>
                         {articleDate}{" "}
-                        <span className="text-primary font-bold text-xl">
+                        <span className="text-primary font-bold text-lg md:text-xl">
                           |
                         </span>{" "}
                         {articleDateHg}
                       </dt>
                     )}
                   </BlurFade>
-                  <BlurFade
-                    delay={0.08}
-                    inView
-                    className="text-lg tracking-tighter"
-                  >
+                  <BlurFade delay={0.08} inView>
                     {name && (
                       <h1
                         className={clsx(
-                          "text-8xl font-bold tracking-tighter mb-5",
+                          "text-6xl md:text-[5rem] font-bold leading-[1.125] mb-6",
                           arefRuqaa.className
                         )}
                       >
@@ -213,18 +164,23 @@ export default async function ArticlePage({ params }) {
                     )}
                     <ReadingTime readingTime={readingTime} />
                   </BlurFade>
-                  <div className="h-[2px] w-full bg-gradient-to-l from-primary/80 to-transparent"></div>
+                  <div className="h-[2px] w-full bg-gradient-to-l from-primary/80 to-transparent mt-2 hidden xl:flex"></div>
                 </div>
-                <div className="grid grid-cols-1 h-fit gap-8">
-                  <BlurFade inView className="flex items-start justify-between h-fit me-2">
-                    <span className="text-lg tracking-tighter">
-                      شارك المقال
-                    </span>
-                    <div className="flex flex-wrap items-start justify-end gap-4">
+                <div className="xl:col-span-3 grid grid-cols-2 xl:grid-cols-1 h-fit gap-8">
+                  <BlurFade
+                    inView
+                    className="flex items-start justify-start  xl:justify-end h-fit xl:me-2 "
+                  >
+                    
+                    <div className="flex flex-wrap items-start justify-start xl:justify-end gap-4">
                       <SocialMediaShare title={name} />
                     </div>
                   </BlurFade>
-                  <BlurFade delay={0.04} inView className="flex items-start justify-end">
+                  <BlurFade
+                    delay={0.04}
+                    inView
+                    className="flex items-start justify-end"
+                  >
                     <div className="flex flex-wrap items-start justify-start gap-4">
                       <div className="bg-green-400 bg-opacity-10 backdrop-blur-sm border-opacity-45 text-green-700 text-xs px-2 py-1 lg:text-sm lg:px-4 lg:py-2 rounded-full flex items-center gap-2 w-fit">
                         <span className="flex flex-wrap items-center justify-center gap-4">
@@ -239,29 +195,31 @@ export default async function ArticlePage({ params }) {
                     </div>
                   </BlurFade>
                 </div>
+                  <div className="h-[2px] w-full bg-gradient-to-l from-primary/80  to-transparent mt-2 xl:hidden visible"></div>
               </div>
             </div>
           </div>
-          <div className="grid grid-cols-4 gap-2 mt-2 mb-8">
+          <div className="grid grid-cols-1 xl:grid-cols-12 gap-2 mt-2 mb-8 mx-auto">
             <BlurFade
               delay={0.1}
               inView
-              className=" w-[75ch] col-span-3 prose max-w-none"
+              className=" md:w-[75ch] xl:col-start-2 xl:col-span-7 prose max-w-none mb-4 xl:mb-0"
             >
               <PortableText value={body} />
             </BlurFade>
-            <div>
-              <div></div>
+            <div className="xl:col-span-3">
               <TrendingHeadlines articlePage={true} />
             </div>
           </div>
         </section>
 
         <section
-          className="flex flex-col gap-12 max-w-[1920px] mx-auto mb-6 mt-4"
+          className="xl:grid xl:grid-cols-12"
           dir="rtl"
         >
-          <Selection selectionPosts={relatedPosts} title="قد يعجبك أيضاً" />
+          <div className="col-start-2 col-span-10 flex flex-col gap-12 max-w-[1920px] mx-auto mb-6 -mt-3 md:mt-4">
+          <Selection selectionPosts={relatedPosts} title="قد يعجبك أيضاً" isArticlePage={true} />
+          </div>
         </section>
       </main>
     </>

@@ -11,6 +11,7 @@ import {
 import SectionHeader from "./ui/SectionHeader";
 import { tagThings } from "@/constants";
 import BlurFade from "./magicui/blur-fade";
+import clsx from "clsx";
 
 const projectId = "chgbiwcm";
 const dataset = "production";
@@ -20,7 +21,7 @@ const urlFor = (source) =>
     : null;
 
 
-export default async function Selection({ selectionPosts , title = "مُختارات" }) {
+export default async function Selection({ selectionPosts , title = "مُختارات", isArticlePage = false }) {
   return (
     <div className="Selections-section relative flex flex-col items-center justify-center mx-auto sm:px-16 px-2 mt-2 gap-10 w-full mb-4">
       <Carousel
@@ -57,7 +58,7 @@ export default async function Selection({ selectionPosts , title = "مُختار
             return (
               <CarouselItem
                 key={index}
-                className="basis-[80%] lg:basis-[33%] xl:basis-[20%]"
+                className={clsx("basis-[80%] lg:basis-[33%] ", isArticlePage ? "xl:basis-[25%]" : "xl:basis-[20%]")}
               >
               <BlurFade key={index} delay={index * 0.1} inView className="">
                 <div className="">
