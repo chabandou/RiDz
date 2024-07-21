@@ -1,8 +1,8 @@
 import { client, sanityFetch } from "@/app/sanity/client";
 
-const HERO_QUERY = `*[_type == "article" && "featured" in tags]{_id, name, description, mainImage, slug, tags}|order(date desc)[0...4]`;
+const HERO_QUERY = `*[_type == "article" && "featured" in tags]{_id, name, description, mainImage, slug, tags, readingTime}|order(date desc)[0...4]`;
 const SELECTION_QUERY = `*[_type == "article" && "selection" in tags]{_id, name, slug, tags, mainImage}|order(date desc)`;
-const NEWS_QUERY = `*[_type == "article" && "news" in tags]{_id, name, description, mainImage, publishedAt, slug, tags}|order(publishedAt desc)[0...5]`;
+const NEWS_QUERY = `*[_type == "article" && "news" in tags]{_id, name, description, mainImage, publishedAt, slug, tags, readingTime}|order(publishedAt desc)[0...5]`;
 const UPCOMINGEVENTS_QUERY = `*[_type == "upcomingEvent"]{_id, name, description, mainImage, GuessedDate}|order(date desc)`;
 
 const { projectId, dataset } = client.config();
@@ -34,11 +34,10 @@ export default async function News({}) {
   return (
     <main className="flex flex-col gap-12 max-w-[1920px] mx-auto" dir="rtl">
       <Hero featuredPosts={featuredPosts} projectId={projectId} dataset={dataset} />
-      <Selection selectionPosts={selectionPosts} />
-      <LatestNews posts={newsPosts} />
-      <Categories />
-      <UpcomingEvents posts={upcomingPosts} slides={SLIDES} options={OPTIONS} projectId={projectId} dataset={dataset} />
-      <CTA />
+      {/* <Selection selectionPosts={selectionPosts} /> */}
+      {/* <LatestNews posts={newsPosts} /> */}
+      {/* <Categories /> */}
+      {/* <UpcomingEvents posts={upcomingPosts} slides={SLIDES} options={OPTIONS} projectId={projectId} dataset={dataset} /> */}
     </main>
   );
 }

@@ -1,69 +1,81 @@
-import {defineField, defineType} from 'sanity'
+import { defineField, defineType } from "sanity";
+import CustomTextEditor from "./components/customTextEditor";
 
 export const articleType = defineType({
-  name: 'article',
-  title: 'Article',
-  type: 'document',
+  name: "article",
+  title: "Article",
+  type: "document",
   fields: [
     defineField({
-      name: 'name',
-      type: 'string',
+      name: "name",
+      type: "string",
     }),
     defineField({
-      name: 'description',
-      type: 'string',
+      name: "description",
+      type: "string",
     }),
     defineField({
-      name: 'slug',
-      type: 'slug',
+      name: "slug",
+      type: "slug",
       options: {
-        source: 'name',
+        source: "name",
         maxLength: 96,
       },
     }),
     defineField({
-      name: 'mainImage',
-      type: 'image',
+      name: "mainImage",
+      type: "image",
       options: {
         hotspot: true,
       },
     }),
     defineField({
-      name: 'categories',
-      type: 'array',
-      of: [{type: 'reference', to: {type: 'category'}}],
+      name: "categories",
+      type: "array",
+      of: [{ type: "reference", to: { type: "category" } }],
     }),
     defineField({
-      name: 'tags',
-      type: 'array',
-      title: 'Tags',
-      of: [{type: 'string'}],
+      name: "tags",
+      type: "array",
+      title: "Tags",
+      of: [{ type: "string" }],
       options: {
-        layout: 'tags',
+        layout: "tags",
       },
     }),
     defineField({
-      name: 'publishedAt',
-      type: 'datetime',
+      name: "publishedAt",
+      type: "datetime",
     }),
+
     defineField({
-      name: 'body',
-      type: 'array',
+      name: "body",
+      type: "array",
+      components: {
+        input: CustomTextEditor,
+      },
       of: [
         {
-          type: 'block',
+          type: "block",
         },
         {
-          type: 'image',
+          type: "image",
           fields: [
             {
-              type: 'text',
-              name: 'alt',
-              title: 'Alternative text',
+              type: "text",
+              name: "alt",
+              title: "Alternative text",
             },
           ],
         },
       ],
     }),
+    defineField({
+      name: "readingTime",
+      type: "number",
+      options: {
+        source: "body",
+      },
+    }),
   ],
-})
+});

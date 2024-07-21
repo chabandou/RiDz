@@ -1,6 +1,10 @@
 import imageUrlBuilder from "@sanity/image-url";
 
+import { timeAgo } from "@/lib/utils";
 import { Circle } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import BlurFade from "./magicui/blur-fade";
 import {
   Card,
   CardDescription,
@@ -8,10 +12,7 @@ import {
   CardHeader,
   CardTitle,
 } from "./ui/card";
-import Link from "next/link";
-import Image from "next/image";
-import { timeAgo } from "@/lib/utils";
-import clsx from "clsx";
+import ReadingTime from "./ReadingTime";
 
 const projectId = "chgbiwcm";
 const dataset = "production";
@@ -20,14 +21,17 @@ const urlFor = (source) =>
     ? imageUrlBuilder({ projectId, dataset }).image(source)
     : null;
 
-export default function BlogHealineCard({ post, className }) {
-  const { name, publishedAt, mainImage, description, tags, body, slug } = post
+export default function BlogHealineCard({ post, className, key }) {
+  const { name, publishedAt, mainImage, description, tags, slug, readingTime } =
+    post;
   const articleImageUrl = mainImage
-  ? urlFor(mainImage)?.width(550).height(310).url()
-  : null;
+    ? urlFor(mainImage)?.width(550).height(310).url()
+    : null;
   const postDate = new Date(publishedAt);
   return (
-    <div
+    <BlurFade
+      delay={key * 0.08}
+      inView={true}
       className={`headline-card flex flex-col md:flex-row justify-start items-center h-fit md:h-1/6 md:gap-4  ${className}`}
     >
       <div className=" w-full h-1/2 md:w-1/3 md:h-full overflow-hidden rounded-lg">
@@ -45,7 +49,10 @@ export default function BlogHealineCard({ post, className }) {
         </Link>
       </div>
       <Card className="h-1/3 md:w-2/3 md:h-full border-none shadow-none flex flex-col items-start justify-between ps-1 md:ps-0">
-        <CardHeader className="sm:space-y-8 ps-0 pb-4 pt-2 sm:pb-6 sm:pt-0">
+        <CardHeader className="ps-0 pb-3 pt-2  sm:pt-0">
+          <span className="text-sm text-muted-foreground">
+            {timeAgo(postDate)}
+          </span>
           <CardTitle>
             <Link
               href={`/news/article/${slug.current}`}
@@ -59,7 +66,7 @@ export default function BlogHealineCard({ post, className }) {
           </CardDescription>
         </CardHeader>
 
-        <CardFooter className="flex gap-2 pb-0 ps-0 md:ps-6">
+        <CardFooter className="flex gap-2 pb-0 ps-0 ">
           <div className="bg-green-400 bg-opacity-10 backdrop-blur-sm border-opacity-45 text-green-700 text-xs px-2 py-1 lg:text-sm lg:px-4 lg:py-2 rounded-full flex items-center gap-2 w-fit">
             <span className="{tag} capitalize">
               {
@@ -79,11 +86,9 @@ export default function BlogHealineCard({ post, className }) {
             fill="gray"
             strokeWidth={0}
           />
-          <span className="text-sm text-muted-foreground">
-            {timeAgo(postDate)}
-          </span>
+          <ReadingTime readingTime={readingTime} />
         </CardFooter>
       </Card>
-    </div>
+    </BlurFade>
   );
 }

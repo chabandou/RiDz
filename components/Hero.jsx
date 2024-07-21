@@ -6,11 +6,9 @@ import { useEffect, useRef, useState } from "react";
 import { tagThings } from "@/constants";
 import clsx from "clsx";
 import Link from "next/link";
-import { ArrowLeft, MoveLeft } from "lucide-react";
+import { ArrowLeft, Circle, MoveLeft } from "lucide-react";
 import { arefRuqaa } from "@/app/(client)/fonts";
-
-
-
+import ReadingTime from "./ReadingTime";
 
 export default function Hero({ featuredPosts, projectId, dataset }) {
   const urlFor = (source) =>
@@ -71,8 +69,6 @@ export default function Hero({ featuredPosts, projectId, dataset }) {
     }
   };
 
-  
-
   return (
     <div className="carousel-container shadow-2xl" dir="rtl">
       <div className="tabs max-h-full ">
@@ -128,8 +124,8 @@ export default function Hero({ featuredPosts, projectId, dataset }) {
           {featuredPosts.map((post, index) => {
             const postTags = post.tags.map((tag) => tag);
             const articleImageUrl = post.mainImage
-            ? urlFor(post.mainImage)?.width(2560).height(1440).url()
-            : null;
+              ? urlFor(post.mainImage)?.width(2560).height(1440).url()
+              : null;
             return (
               <div
                 key={post.id}
@@ -139,9 +135,7 @@ export default function Hero({ featuredPosts, projectId, dataset }) {
                 onTouchEnd={(e) => handleTouchEnd(e, index)}
               >
                 <div className="overlay"></div>
-                <div
-                  className=" text-white w-full lg:w-[50%] rounded-lg p-6 flex flex-col justify-center items-start gap-2 lg:gap-6 text-right lg:mb-[9.3rem] z-10 translate-y-[19vh] lg:translate-y-0"
-                >
+                <div className=" text-white w-full lg:w-[50%] rounded-lg p-6 flex flex-col justify-center items-start gap-2 lg:gap-6 text-right lg:mb-[9.3rem] z-10 translate-y-[19vh] lg:translate-y-0">
                   <div className="flex justify-between items-center">
                     <div className="flex gap-2">
                       {postTags.slice(0, 4).map(
@@ -186,21 +180,33 @@ export default function Hero({ featuredPosts, projectId, dataset }) {
                       {post.description}
                     </p>
                   </div>
-                  <Link
-                    href={`/news/article/${post.slug.current}`}
-                    className="flex gap-3 items-center justify-center group m-2 lg:mt-0"
-                  >
-                    <div className="w-[3.5rem] h-[3.5rem] bg-slate-500 bg-opacity-60 opacity-80 rounded-full p-3 group-hover:bg-green-600 group-hover:opacity-100 transition duration-300 ease-in flex items-center justify-center">
-                      <ArrowLeft
-                        className="transition duration-300 ease-in group-hover:-translate-x-1"
-                        size={45}
-                        strokeWidth={1.5}
-                      />
-                    </div>
-                    <span className="lg:text-2xl text-xl opacity-90 transition duration-300 ease-in group-hover:opacity-100">
-                      إقرأ المقال
-                    </span>
-                  </Link>
+                  <div className="flex gap-3 items-center justify-center m-2 lg:mt-0">
+                    <Link
+                      href={`/news/article/${post.slug.current}`}
+                      className="flex gap-3 items-center justify-center group "
+                    >
+                      <div className="w-[3.5rem] h-[3.5rem] bg-slate-500 bg-opacity-60 opacity-80 rounded-full p-3 group-hover:bg-green-600 group-hover:opacity-100 transition duration-300 ease-in flex items-center justify-center">
+                        <ArrowLeft
+                          className="transition duration-300 ease-in group-hover:-translate-x-1"
+                          size={45}
+                          strokeWidth={1.5}
+                        />
+                      </div>
+                      <span className="lg:text-xl text-xl opacity-90 transition duration-300 ease-in group-hover:opacity-100">
+                        إقرأ المقال
+                      </span>
+                    </Link>
+                    <Circle
+                      size={15}
+                      className="text-xl opacity-60"
+                      fill="white"
+                      strokeWidth={0}
+                    />
+                    <ReadingTime
+                      readingTime={post.readingTime}
+                      className="text-lg text-muted"
+                    />
+                  </div>
                 </div>
               </div>
             );

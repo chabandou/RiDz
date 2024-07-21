@@ -1,16 +1,15 @@
-import { fetchByTag } from "@/app/lib/notion";
+import { arefRuqaa } from "@/app/(client)/fonts";
 import clsx from "clsx";
 import Image from "next/image";
-import { arefRuqaa } from "@/app/(client)/fonts";
 
-import AllNewsHeadlines from "@/components/AllNewsHeadlines";
-import { tagThings } from "@/constants";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import TrendingHeadlines from "@/components/TrendingHeadlines";
 import { sanityFetch } from "@/app/sanity/client";
+import AllNewsHeadlines from "@/components/AllNewsHeadlines";
+import TrendingHeadlines from "@/components/TrendingHeadlines";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { tagThings } from "@/constants";
 
 export default async function Category({ params }) {
-  const posts = await sanityFetch({ query: `*[_type == "article" && "${params.tag}" in tags]{_id, name, description, mainImage, slug, tags}` });
+  const posts = await sanityFetch({ query: `*[_type == "article" && "${params.tag}" in tags]{_id, name, description, mainImage, slug, tags, publishedAt, readingTime}` });
   const title = tagThings[params.tag].translation;
   const newsPosts = posts.filter((post) =>
     post.tags.some((tag) => tag === "news")

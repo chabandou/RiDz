@@ -21,30 +21,55 @@ export default function Footer() {
             All Rights Reserved &copy;
           </p>
         </div>
-        <div className="flex-1 w-full flex flex-row-reverse  md:items-start md:justify-end flex-wrap max-md:mt-10 gap-20" dir="rtl">
+        <div
+          className="flex-1 w-full flex flex-row-reverse  md:items-start md:justify-end flex-wrap max-md:mt-10 gap-20"
+          dir="rtl"
+        >
           {footerLinks.map((link, index) => (
-            <div key={link.title} className="flex flex-col gap-6 text-base min-w-[170px] text-gray-100" dir="ltr" >
+            <div
+              key={link.title}
+              className="flex flex-col gap-6 text-base min-w-[170px] text-gray-100"
+              dir="ltr"
+            >
               <h3 className="font-bold">{link.title}</h3>
-              {index === 2 && (
+              {index === 2 &&
                 link.links.map((item, index) => (
-                    <span
-                      key={index}
-                      href={item.url}
-                      className=" text-gray-200 flex gap-2 items-center justify-start"
-                    >
-                      {item.title} {item.url}
-                    </span>
-                  ))
-              )}
-              {index !== 2 && link.links.map((item, index) => (
-                <Link
-                  key={index}
-                  href={item.url}
-                  className="hover:text-gray-100 group hover:underline text-gray-200 flex gap-2 items-center justify-start"
-                >
-                  <span className={clsx(item.title === "Youtube" && "group-hover:text-red-500", item.title === "Twitter" && "group-hover:text-blue-500", item.title === "Instagram" && "group-hover:text-[#E4405F]", item.title === "Facebook" && "group-hover:text-[#0866FF]")}>{item.icon && item.icon}</span> {item.title} 
-                </Link>
-              ))}
+                  <span
+                    key={index}
+                    href={item.url}
+                    className=" text-gray-200 flex gap-2 items-center justify-start"
+                  >
+                    {item.title} {item.url}
+                  </span>
+                ))}
+              {index !== 2 &&
+                link.links.map((item, index) => {
+                  if (item.title !== "Messenger") {
+                    return (
+                      <Link
+                        key={index}
+                        href={item.url}
+                        className="hover:text-gray-100 group hover:underline text-gray-200 flex gap-2 items-center justify-start"
+                      >
+                        <span
+                          className={clsx(
+                            item.title === "Youtube" &&
+                              "group-hover:text-red-500",
+                            item.title === "Twitter" &&
+                              "group-hover:text-blue-500",
+                            item.title === "Instagram" &&
+                              "group-hover:text-[#E4405F]",
+                            item.title === "Facebook" &&
+                              "group-hover:text-[#0866FF]"
+                          )}
+                        >
+                          {item.icon && item.icon}
+                        </span>{" "}
+                        {item.title}
+                      </Link>
+                    );
+                  }
+                })}
             </div>
           ))}
         </div>

@@ -4,6 +4,7 @@ import Link from "next/link";
 import BlogHealineCard from "./BlogHealineCard";
 import TrendingHeadlines from "./TrendingHeadlines";
 import SectionHeader from "./ui/SectionHeader";
+import BlurFade from "./magicui/blur-fade";
 
 export default async function LatestNews({ posts }) {
   return (
@@ -23,11 +24,17 @@ export default async function LatestNews({ posts }) {
 
         <div className="w-full space-y-6 md:space-y-10 max-h-[332vh] min-h-[85vh]">
           {posts.slice(0, 5).map((post, index) => {
-            return <BlogHealineCard key={index} post={post} className={"h-[8.3%] min-h-[200px]"} />;
+            return (
+              <BlogHealineCard
+                key={index}
+                post={post}
+                className={"h-[8.3%] min-h-[200px]"}
+              />
+            );
           })}
         </div>
       </div>
-      <TrendingHeadlines />
+        <TrendingHeadlines />
     </section>
   );
 }

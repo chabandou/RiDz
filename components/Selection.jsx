@@ -10,6 +10,7 @@ import {
 } from "./ui/carousel";
 import SectionHeader from "./ui/SectionHeader";
 import { tagThings } from "@/constants";
+import BlurFade from "./magicui/blur-fade";
 
 const projectId = "chgbiwcm";
 const dataset = "production";
@@ -19,7 +20,7 @@ const urlFor = (source) =>
     : null;
 
 
-export default async function Selection({ selectionPosts }) {
+export default async function Selection({ selectionPosts , title = "مُختارات" }) {
   return (
     <div className="Selections-section relative flex flex-col items-center justify-center mx-auto sm:px-16 px-2 mt-2 gap-10 w-full mb-4">
       <Carousel
@@ -33,7 +34,7 @@ export default async function Selection({ selectionPosts }) {
         }}
         className=" max-w-full xl:w-full mx-auto space-y-8"
       >
-        <SectionHeader title="مُختارات">
+        <SectionHeader title={title}>
           <CarouselNext className="hidden lg:flex left-0 top-0 translate-x-12" />
           <CarouselPrevious className="hidden lg:flex left-0 top-0" />
         </SectionHeader>
@@ -58,10 +59,11 @@ export default async function Selection({ selectionPosts }) {
                 key={index}
                 className="basis-[80%] lg:basis-[33%] xl:basis-[20%]"
               >
+              <BlurFade key={index} delay={index * 0.1} inView className="">
                 <div className="">
                   <Card
                     key={_id}
-                    className="flex items-center justify-center rounded-lg overflow-hidden shadow-2xl h-[350px] w-full"
+                    className="flex items-center justify-center rounded-lg overflow-hidden shadow-md h-[350px] w-full border-none"
                   >
                     <div
                       className="card-body bg-cover bg-center text-white h-full w-full"
@@ -76,7 +78,7 @@ export default async function Selection({ selectionPosts }) {
                       >
                         <div className="bg-gradient-to-t from-[#000000] to-80% flex flex-col justify-center h-full w-full transition-all duration-300 ">
                           <CardHeader className="flex flex-col justify-between items-start h-full">
-                            <div className="bg-slate-500 bg-opacity-10 backdrop-blur-sm border border-white border-opacity-45 text-white text-xs px-2 py-1 lg:text-sm lg:px-4 lg:py-2 rounded-full flex items-center gap-2 w-fit">
+                            <div className="bg-slate-500 bg-opacity-20 backdrop-blur-sm border border-white border-opacity-45 text-white text-xs px-2 py-1 lg:text-sm lg:px-4 lg:py-2 rounded-full flex items-center gap-2 w-fit">
                               <span className="{tag} capitalize">
                                 {tagThings[tag]?.translation || tag}
                               </span>
@@ -91,6 +93,7 @@ export default async function Selection({ selectionPosts }) {
                     </div>
                   </Card>
                 </div>
+              </BlurFade>
               </CarouselItem>
             );
           })}
