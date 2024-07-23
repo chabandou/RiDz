@@ -2,7 +2,7 @@ import { Clock } from "lucide-react";
 
 export default function ReadingTime({ readingTime, className }) {
   return (
-    <div className={`text-xs md:text-sm text-muted-foreground ${className}`}>
+    <div className={`text-xs md:text-sm ${className}`}>
                   {readingTime &&
                     (readingTime < 3 ? (
                       readingTime === 1 ? (

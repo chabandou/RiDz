@@ -26,7 +26,7 @@ async function getTrendingPostsInfo() {
   }
 }
 
-export default async function TrendingHeadlines({articlePage = false}) {
+export default async function TrendingHeadlines({ articlePage = false }) {
   const trendingPostsInfo = await getTrendingPostsInfo();
 
   async function getFinalTrendingPosts(array) {
@@ -43,9 +43,18 @@ export default async function TrendingHeadlines({articlePage = false}) {
   const trendingPosts = await getFinalTrendingPosts(trendingPostsInfo);
 
   return (
-    <BlurFade delay={0.3} inView className="mt-4 flex items-start justify-start flex-col gap-8 h-fit bg-green-400 bg-opacity-10 backdrop-blur-sm border-opacity-45 text-green-700 rounded-lg p-6 border-green-700 border-spacing-7 inset-4">
+    <BlurFade
+      delay={0.3}
+      inView
+      className="mt-4 flex items-start justify-start flex-col gap-8 h-fit bg-green-400 bg-opacity-10 backdrop-blur-sm border-opacity-45 text-green-700 rounded-lg p-6 border-green-700 border-spacing-7 inset-4"
+    >
       <div className="w-full flex items-start justify-center gap-2">
-        <span className={clsx(articlePage ? "text-2xl" : "text-3xl", "text-black text-opacity-70 font-bold drop-shadow-[0_1px_1px_rgba(0,0,0,0.25)]")}>
+        <span
+          className={clsx(
+            articlePage ? "text-2xl" : "text-3xl",
+            "text-black text-opacity-70 font-bold drop-shadow-[0_1px_1px_rgba(0,0,0,0.25)]"
+          )}
+        >
           الأكثر تفاعلاً
         </span>
         <Image
@@ -60,7 +69,7 @@ export default async function TrendingHeadlines({articlePage = false}) {
         {trendingPosts.map((post, index) => (
           <BlurFade
             key={index}
-            delay={0.3 + (index * 0.1)}
+            delay={0.3 + index * 0.1}
             className={clsx(
               "flex items-start justify-start gap-4 pb-4 min-h-[6.5rem]",
               {
@@ -71,13 +80,23 @@ export default async function TrendingHeadlines({articlePage = false}) {
             inView={true}
           >
             <div className="w-1/6 h-full flex items-center justify-center">
-              <span className={clsx(articlePage ? "sm:text-4xl" : "sm:text-5xl", "text-4xl trending-number font-bold drop-shadow-[0_1px_0px_rgba(0,0,0,0.5)] ")}>
+              <span
+                className={clsx(
+                  articlePage ? "sm:text-4xl" : "sm:text-5xl",
+                  "text-4xl trending-number font-bold drop-shadow-[0_1px_0px_rgba(0,0,0,0.5)] "
+                )}
+              >
                 #{index + 1}
               </span>
             </div>
             <div className="w-5/6 h-full flex flex-col items-start justify-between gap-3 ">
               <Link href={`/news/article/${post.slug?.current}`}>
-                <span className={clsx(articlePage ? "text-lg" : "text-xl", "text-green-700 hover:text-opacity-80 font-bold drop-shadow-[1px_1px_0px_rgba(0,0,0,0.25)]")}>
+                <span
+                  className={clsx(
+                    articlePage ? "text-lg" : "text-xl",
+                    "text-green-700 hover:text-opacity-80 font-bold drop-shadow-[1px_1px_0px_rgba(0,0,0,0.25)]"
+                  )}
+                >
                   {post.name}
                 </span>
               </Link>

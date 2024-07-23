@@ -34,8 +34,8 @@ export default async function News({}) {
   return (
     <main className="flex flex-col gap-12 max-w-[1920px] mx-auto" dir="rtl">
       <Hero featuredPosts={featuredPosts} projectId={projectId} dataset={dataset} />
-      {/* <Selection selectionPosts={selectionPosts} /> */}
-      {/* <LatestNews posts={newsPosts} /> */}
+      <Selection selectionPosts={selectionPosts} />
+      <LatestNews posts={newsPosts} />
       {/* <Categories /> */}
       {/* <UpcomingEvents posts={upcomingPosts} slides={SLIDES} options={OPTIONS} projectId={projectId} dataset={dataset} /> */}
     </main>

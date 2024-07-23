@@ -27,7 +27,7 @@ export default function Navbar() {
           </span>
         </Link>
         <div className="hidden md:flex gap-8 items-center justify-center font-semibold">
-          <Link href="/"> Accueil </Link>
+          <Link href="/"> السيارات </Link>
           <Link
             className={clsx(
               "transition-all hover:text-primary",
@@ -36,20 +36,20 @@ export default function Navbar() {
             href="/news"
           >
             {" "}
-            Nouveux{" "}
+            الأخبار{" "}
           </Link>
-          <Link href="/about"> A propos </Link>
+          <Link href="/about"> عن موقعنا </Link>
           <div className="flex gap-2">
             <Button variant="default" className="rounded-full">
               {" "}
-              S&apos;inscrire{" "}
+              إنضم{" "}
             </Button>
             <Button
               variant="outline"
               className="rounded-full border-2 border-primary text-primary hover:text-primary"
             >
               {" "}
-              Connexion{" "}
+              تسجيل الدخول{" "}
             </Button>
           </div>
         </div>

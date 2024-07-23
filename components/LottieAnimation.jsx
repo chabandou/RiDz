@@ -1,4 +1,4 @@
-// components/LottieAnimation.js
+"use client";
 
 import React, { useEffect, useRef, useState, visible } from "react";
 import Lottie from "lottie-react";
@@ -11,7 +11,6 @@ const LottieAnimation = ({
   delay = 0,
   hover = false,
 }) => {
-
   const lottieRef = useRef(null);
 
   useEffect(() => {
@@ -25,26 +24,32 @@ const LottieAnimation = ({
   }, [delay]);
   return (
     <div
-    onMouseEnter={hover ? () => {
-      if (lottieRef.current) {
-        lottieRef.current.play();
+      onMouseEnter={
+        hover
+          ? () => {
+              if (lottieRef.current) {
+                lottieRef.current.play();
+              }
+            }
+          : null
       }
-    } : null}
-    onMouseLeave={hover ?() => {
-      if (lottieRef.current) {
-        lottieRef.current.pause();
+      onMouseLeave={
+        hover
+          ? () => {
+              if (lottieRef.current) {
+                lottieRef.current.pause();
+              }
+            }
+          : null
       }
-    } : null}
     >
-
-        <Lottie
-          animationData={animationData}
-          loop={loop}
-          autoplay={autoplay}
-          style={style}
-          lottieRef={lottieRef}
-          on
-        />
+      <Lottie
+        animationData={animationData}
+        loop={loop}
+        autoplay={autoplay}
+        style={style}
+        lottieRef={lottieRef}
+      />
     </div>
   );
 };

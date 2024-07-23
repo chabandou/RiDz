@@ -110,6 +110,7 @@ export default function CTA() {
                 لتصلك آخر الأخبار المتعلقة بالسيارات الجزائرية مباشرة على صندوق
                 بريدك الالكتروني سجل لتنظم إلى قائمة المتلقين
               </p>
+
               <Form {...form}>
                 <form
                   onSubmit={form.handleSubmit(onSubmit)}

@@ -4,7 +4,7 @@ const TextEditor = (props) => {
 
 
   const countWords = (text) => {
-    return text.trim().split(/\s+/).length;
+    return text?.trim().split(/\s+/).length;
   };
   function readingTime(wordCount) {
     const readingTime = Math.ceil(wordCount / 200);

@@ -1,3 +1,4 @@
+
 import { arefRuqaa } from "@/app/(client)/fonts";
 import clsx from "clsx";
 import Image from "next/image";
@@ -5,18 +6,21 @@ import Image from "next/image";
 import { sanityFetch } from "@/app/sanity/client";
 import AllNewsHeadlines from "@/components/AllNewsHeadlines";
 import TrendingHeadlines from "@/components/TrendingHeadlines";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { tagThings } from "@/constants";
+import { Cat } from "lucide-react";
+import CategoryTabs from "@/components/CategoryTabs";
 
-export default async function Category({ params }) {
-  const posts = await sanityFetch({ query: `*[_type == "article" && "${params.tag}" in tags]{_id, name, description, mainImage, slug, tags, publishedAt, readingTime}` });
+export default async function Category({ params, searchParams }) {
   const title = tagThings[params.tag].translation;
-  const newsPosts = posts.filter((post) =>
-    post.tags.some((tag) => tag === "news")
-  );
-  const essayPosts = posts.filter((post) =>
-    post.tags.some((tag) => tag === "essay")
-  );
+
+  const page = Number(searchParams.page) || 1;
+  const type = searchParams.type;
+  const QUERY = `*[_type == "article" && "${params.tag}" in tags && "${type}" in tags][${page - 1 * 5}...${(page * 5)}]{_id, name, description, mainImage, slug, tags, publishedAt, readingTime}`;
+  const posts = await sanityFetch({ query: QUERY });
+  const countQuery = `*[_type == "article" && "${params.tag}" in tags && "${type}" in tags]{_id, name, description, mainImage, slug, tags, publishedAt, readingTime}`;
+  const allPosts = await sanityFetch({ query: `count(${countQuery})` });
+  // console.log(allPosts);
+ 
 
 
   return (
@@ -40,35 +44,7 @@ export default async function Category({ params }) {
         </h1>
       </div>
       <section className="Latest-section relative w-full grid grid-cols-1 lg:grid-cols-3 mx-auto sm:px-16 px-6  mb-4">
-        <Tabs
-          defaultValue="news"
-          className="col-span-2 flex flex-col items-start justify-center gap-4 h-full"
-          dir="rtl"
-        >
-          <TabsList className="w-[90%] mx-auto grid grid-cols-2 h-fit">
-            <TabsTrigger
-              value="news"
-              className="text-xl data-[state=active]:text-white data-[state=active]:bg-primary/85"
-            >
-              الأخبار
-            </TabsTrigger>
-            <TabsTrigger
-              value="essay"
-              className="text-xl data-[state=active]:text-white data-[state=active]:bg-primary/85"
-            >
-              مقالات
-            </TabsTrigger>
-          </TabsList>
-          <TabsContent value="news" className="w-fit h-full grid grid-cols-1">
-            <AllNewsHeadlines posts={newsPosts} title={`كل أخبار ${title}`} />
-          </TabsContent>
-          <TabsContent value="essay" className="w-full h-full grid grid-cols-1">
-            <AllNewsHeadlines
-              posts={essayPosts}
-              title={`كل المقالات عن ${title}`}
-            />
-          </TabsContent>
-        </Tabs>
+        <CategoryTabs params={params} posts={posts} allPosts={allPosts} />
           <TrendingHeadlines />
       </section>
     </main>

@@ -22,13 +22,13 @@ export default async function LatestNews({ posts }) {
           </Link>
         </SectionHeader>
 
-        <div className="w-full space-y-6 md:space-y-10 max-h-[332vh] min-h-[85vh]">
+        <div className="w-full space-y-8 lg:space-y-10 h-full">
           {posts.slice(0, 5).map((post, index) => {
             return (
               <BlogHealineCard
                 key={index}
                 post={post}
-                className={"h-[8.3%] min-h-[200px]"}
+                className={"md:h-[200px]"}
               />
             );
           })}

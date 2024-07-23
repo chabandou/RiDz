@@ -47,6 +47,30 @@ const urlFor = (source) =>
     ? imageUrlBuilder({ projectId, dataset }).image(source)
     : null;
 
+    const SampleImageComponent = ({value, isInline}) => {
+      const {width, height} = value; 
+      return (
+        <Image
+          src={imageUrlBuilder({ projectId, dataset })
+            .image(value)
+            .auto('format')
+            .url()}
+          alt={value.alt || ' '}
+          loading="lazy"
+          style={{
+            // Display alongside text if image appears inside a block text span
+            display: isInline ? 'inline-block' : 'block',
+    
+            // Avoid jumping around with aspect-ratio CSS property
+            objectFit: 'cover',
+            objectPosition: 'center',
+            aspectRatio: 16 / 9,
+          }}
+          width={1920}
+          height={1080}
+        />
+      )
+    }
 export default async function ArticlePage({ params }) {
   const article = await sanityFetch({
     query: ARTICLE_QUERY,
@@ -81,6 +105,13 @@ export default async function ArticlePage({ params }) {
     query: RELATED_QUERY,
   });
 
+  const components = {
+    types: {
+      image: SampleImageComponent,
+      // Any other custom types you have in your content
+      // Examples: mapLocation, contactForm, code, featuredProjects, latestNews, etc.
+    },
+  }
   return (
     <>
       <main className="overflow-x-hidden" dir="rtl">
@@ -97,7 +128,7 @@ export default async function ArticlePage({ params }) {
                 height="1080"
                 width="1920"
               />
-              <div className="md:w-[75ch] grid grid-cols-1 xl:grid-cols-12 place-content-center gap-8 xl:gap-2 mx-auto">
+              <div className="md:w-[75ch] xl:w-full grid grid-cols-1 xl:grid-cols-12 place-content-center gap-8 xl:gap-2 mx-auto ">
                 <div className="article-title  xl:col-start-2 xl:col-span-7 flex flex-col flex-wrap items-start justify-start gap-2 ">
                   <BlurFade inView className="text-sm xl:text-lg mb-2 xl:mb-0">
                     {articleDate && (
@@ -205,7 +236,7 @@ export default async function ArticlePage({ params }) {
               inView
               className=" md:w-[75ch] xl:col-start-2 xl:col-span-7 prose max-w-none mb-4 xl:mb-0"
             >
-              <PortableText value={body} />
+              <PortableText value={body} components={components} />
             </BlurFade>
             <div className="xl:col-span-3">
               <TrendingHeadlines articlePage={true} />
