@@ -9,6 +9,7 @@ import Link from "next/link";
 import { ArrowLeft, Circle, MoveLeft } from "lucide-react";
 import { arefRuqaa } from "@/app/(client)/fonts";
 import ReadingTime from "./ReadingTime";
+import { motion } from "framer-motion";
 
 export default function Hero({ featuredPosts, projectId, dataset }) {
   const urlFor = (source) =>
@@ -22,13 +23,13 @@ export default function Hero({ featuredPosts, projectId, dataset }) {
 
     function changeRadio() {
       // Uncheck all radios
-      radios.forEach((radio) => (radio.checked = false));
+      // radios.forEach((radio) => (radio.checked = false));
 
       // Check the next radio
-      radios[currentIndex].checked = true;
+      // radios[currentIndex].checked = true;
 
       // Move to the next index, wrapping around if necessary
-      currentIndex = (currentIndex + 1) % radios.length;
+      // currentIndex = (currentIndex + 1) % radios.length;
     }
 
     // Change radio every 2 seconds (2000 milliseconds)
@@ -36,7 +37,7 @@ export default function Hero({ featuredPosts, projectId, dataset }) {
     // setInterval(changeRadio, 3500);
   }, []);
 
-  const [selected, setSelected] = useState(null);
+  const [selected, setSelected] = useState(0);
   const touchStartX = useRef(0);
   const touchEndX = useRef(0);
   const threshold = 50; // Minimum swipe distance
@@ -69,6 +70,15 @@ export default function Hero({ featuredPosts, projectId, dataset }) {
     }
   };
 
+  function anim(variants, index) {
+    return {
+      initial: "initial",
+      animate: "enter",
+      exit: "exit",
+      variants,
+    };
+  }
+
   return (
     <div className="carousel-container shadow-2xl" dir="rtl">
       <div className="tabs max-h-full ">
@@ -83,10 +93,33 @@ export default function Hero({ featuredPosts, projectId, dataset }) {
           />
         ))}
         <div className="buttons" dir="rtl">
-          {featuredPosts.map((post, index) => (
-            <label key={post._id} htmlFor={post._id}>
-              <div className="circle relative lg:flex-[1.3] w-[55px] ">
-                <svg
+          {featuredPosts.map((post, index) => {
+            const progressAnim = {
+              initial: {
+                x: 380,
+              },
+              enter: {
+                x: selected === index && 0,
+                transition: {
+                  duration: 5,
+                  ease: "linear",
+                },
+              },
+            };
+            return (
+              <label
+                key={post._id}
+                htmlFor={post._id}
+                className="overflow-hidden"
+              >
+                {selected === index && (
+                  <motion.div
+                    {...anim(progressAnim, index)}
+                    className="progress-bar absolute top-0 left-0 w-full h-[7px] bg-green-500 "
+                  ></motion.div>
+                )}
+                <div className="circle relative w-1/4 ">
+                  {/* <svg
                   xmlns="http://www.w3.org/2000/svg"
                   version="1.1"
                   viewBox="0 0 160 160"
@@ -107,20 +140,27 @@ export default function Hero({ featuredPosts, projectId, dataset }) {
                     r="70"
                     strokeLinecap="round"
                   />
-                </svg>
-                <span className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] font-semibold text-white opacity-90 text-xl">
-                  {index + 1}
-                </span>
-              </div>
-              <div className="hidden lg:flex lg:flex-[4]">
-                <span className=" font-semibold text-white opacity-85 text-lg line-clamp-2 ">
-                  {post.name}
-                </span>
-              </div>
-            </label>
-          ))}
+                </svg> */}
+
+                  <span className="button-text absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] font-extralight text-white opacity-90 text-5xl">
+                    0{index + 1}
+                  </span>
+                </div>
+                <div className="hidden lg:flex">
+                  <span className="button-text font-semibold text-white text-lg line-clamp-2 ">
+                    {post.name}
+                  </span>
+                </div>
+                {index < featuredPosts.length - 1 && (
+                  <div className="flex items-center justify-center">
+                    <div className="w-[2px] h-[65%] bg-white/15 absolute top-[50%] left-0 -translate-y-1/2 z-10" />
+                  </div>
+                )}
+              </label>
+            );
+          })}
         </div>
-        <div className="content">
+        <div key={selected} className="content relative w-[100vw] h-[100vh] overflow-hidden">
           {featuredPosts.map((post, index) => {
             const postTags = post.tags.map((tag) => tag);
             const articleImageUrl = post.mainImage
@@ -129,13 +169,13 @@ export default function Hero({ featuredPosts, projectId, dataset }) {
             return (
               <div
                 key={post.id}
-                className={`box ${post.id} bg-cover bg-no-repeat bg-center flex items-end justify-start max-h-[70vh] translate-y-[0vh] lg:max-h-[115vh] lg:translate-y-[0vh]`}
+                className={`box ${post.id}  bg-cover bg-no-repeat bg-center flex items-end justify-start max-h-[70vh] translate-y-[0vh] lg:max-h-[115vh] lg:translate-y-[0vh]`}
                 style={{ backgroundImage: `url(${articleImageUrl})` }}
                 onTouchStart={handleTouchStart}
                 onTouchEnd={(e) => handleTouchEnd(e, index)}
               >
                 <div className="overlay"></div>
-                <div className=" text-white w-full lg:w-[50%] rounded-lg p-6 flex flex-col justify-center items-start gap-2 lg:gap-6 text-right lg:mb-[9.3rem] z-10 translate-y-[19vh] lg:translate-y-0">
+                <div className="inner-text text-white w-full lg:w-[50%] rounded-lg p-6 flex flex-col justify-center items-start gap-2 lg:gap-6 text-right lg:mb-[9.3rem] z-10 translate-y-[19vh] lg:translate-y-0">
                   <div className="flex justify-between items-center">
                     <div className="flex gap-2">
                       {postTags.slice(0, 4).map(

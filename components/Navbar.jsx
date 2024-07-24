@@ -11,7 +11,7 @@ export default function Navbar() {
   const pathname = usePathname();
 
   return (
-    <header className="w-full block top-0 left-0 z-10 ">
+    <header className="relative w-full block top-0 left-0 z-50 ">
       <nav className="max-w-[1920px] mx-auto flex justify-between items-center sm:px-16 px-6 py-5">
         <Link href="/" className="flex justify-center items-center">
           <Image
