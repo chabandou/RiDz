@@ -79,7 +79,6 @@
 
 .buttons {
   width: 100%;
-  height: 140px;
   margin: 4rem auto 0;
   position: absolute;
   bottom: 0px;
@@ -98,8 +97,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 8px;
-  padding: 15px;
   cursor: pointer;
   transition: 0.5s;
   position: relative;
@@ -144,32 +141,49 @@
   display: flex;
   user-select: none;
   padding: 40px;
-  opacity: 0;
   position: absolute;
   top: 0;
   left: 0;
   bottom: 0;
   right: 0;
-  transition: all 0.6s ease-in-out ;
+  transition: all 0.6s ease-in-out;
 }
 
+
+@keyframes showContent {
+  from {
+    clip-path: circle(0% at 0% 50%);
+  }
+  to {
+    clip-path: circle(130% at 0% 50%);
+  }
+}
 
 
 
 .tabs input:nth-child(1):checked ~ .content .box:nth-child(1) {
-  opacity: 1;
-
+  animation: showContent 0.6s ease-in-out 1 forwards;
 }
+/* .tabs input:nth-child(1):checked ~ .content .box:nth-child(4)  {
+  z-index: 9;
+  display: flex;
+} */
+
+
 .tabs input:nth-child(2):checked ~ .content .box:nth-child(2) {
-  opacity: 1;
-
+  animation: showContent 0.6s ease-in-out 1 forwards;
 }
+/* .tabs input:nth-child(2):checked ~ .content .box:nth-child(1), .tabs input:nth-child(2):checked ~ .content .box:nth-child(3)  {
+  display: flex;
+} */
+
 .tabs input:nth-child(3):checked ~ .content .box:nth-child(3) {
-  opacity: 1;
+
+  animation: showContent 0.6s ease-in-out 1 forwards;
 
 }
 .tabs input:nth-child(4):checked ~ .content .box:nth-child(4) {
-  opacity: 1;
+  animation: showContent 0.6s ease-in-out 1 forwards;
 
 }
 
@@ -193,27 +207,8 @@
   background: hsl(51, 100%, 35%);
 }
 
-.tabs input:nth-child(1):checked ~ .buttons label:nth-child(1) circle,
-.tabs input:nth-child(2):checked ~ .buttons label:nth-child(2) circle,
-.tabs input:nth-child(3):checked ~ .buttons label:nth-child(3) circle,
-.tabs input:nth-child(4):checked ~ .buttons label:nth-child(4) circle {
-  animation: filling 3.5s linear forwards;
-}
 
-.circle circle {
-  fill: none;
-  stroke: rgb(255, 255, 255);
-  stroke-width: 15px;
-  stroke-dasharray: 440;
-  stroke-dashoffset: 440;
-}
-.circle .circle-2 {
-  fill: none;
-  stroke: hsla(0, 0%, 100%, 0.498);
-  stroke-width: 15px;
-  stroke-dasharray: 440;
-  stroke-dashoffset: 0;
-}
+
 
 @keyframes filling {
   100% {
@@ -231,21 +226,13 @@
     /* bottom: 31%; */
   }
 
-  .buttons {
-    margin: 0;
-    padding: 2rem 1rem;
-  }
+ 
 
   .content .box {
     padding: 0px 0px;
   }
 
-  .buttons label {
-    padding: 10px;
-    .circle {
-      display: none;
-    }
-  }
+ 
 }
 
 /* ***************************** Embla Carousel ***************************** */

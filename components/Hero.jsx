@@ -2,7 +2,7 @@
 
 import imageUrlBuilder from "@sanity/image-url";
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { tagThings } from "@/constants";
 import clsx from "clsx";
 import Link from "next/link";
@@ -10,6 +10,7 @@ import { ArrowLeft, Circle, MoveLeft } from "lucide-react";
 import { arefRuqaa } from "@/app/(client)/fonts";
 import ReadingTime from "./ReadingTime";
 import { motion } from "framer-motion";
+import { set } from "mongoose";
 
 export default function Hero({ featuredPosts, projectId, dataset }) {
   const urlFor = (source) =>
@@ -17,27 +18,8 @@ export default function Hero({ featuredPosts, projectId, dataset }) {
       ? imageUrlBuilder({ projectId, dataset }).image(source)
       : null;
 
-  useEffect(() => {
-    let radios = document.querySelectorAll('input[name="slider"]');
-    let currentIndex = 0;
-
-    function changeRadio() {
-      // Uncheck all radios
-      // radios.forEach((radio) => (radio.checked = false));
-
-      // Check the next radio
-      // radios[currentIndex].checked = true;
-
-      // Move to the next index, wrapping around if necessary
-      // currentIndex = (currentIndex + 1) % radios.length;
-    }
-
-    // Change radio every 2 seconds (2000 milliseconds)
-
-    // setInterval(changeRadio, 3500);
-  }, []);
-
   const [selected, setSelected] = useState(0);
+
   const touchStartX = useRef(0);
   const touchEndX = useRef(0);
   const threshold = 50; // Minimum swipe distance
@@ -70,6 +52,20 @@ export default function Hero({ featuredPosts, projectId, dataset }) {
     }
   };
 
+  useEffect(() => {
+    const autoPlay = () => {
+      if (selected === featuredPosts.length - 1) {
+        prevSelected.current = selected;
+        setSelected(0);
+      } else {
+        prevSelected.current = selected;
+        setSelected(selected + 1);
+      }
+    };
+    const interval = setInterval(autoPlay, 5000);
+    return () => clearInterval(interval);
+  }, [featuredPosts.length, selected]);
+
   function anim(variants, index) {
     return {
       initial: "initial",
@@ -78,6 +74,9 @@ export default function Hero({ featuredPosts, projectId, dataset }) {
       variants,
     };
   }
+
+  const prevSelected = useRef();
+  console.log(prevSelected.current);
 
   return (
     <div className="carousel-container shadow-2xl" dir="rtl">
@@ -89,10 +88,13 @@ export default function Hero({ featuredPosts, projectId, dataset }) {
             type="radio"
             name="slider"
             checked={selected === index}
-            onChange={() => setSelected(index)}
+            onChange={() => {
+              prevSelected.current = selected;
+              setSelected(index);
+            }}
           />
         ))}
-        <div className="buttons" dir="rtl">
+        <div className="buttons h-[120px] lg:h-[140px]  " dir="rtl">
           {featuredPosts.map((post, index) => {
             const progressAnim = {
               initial: {
@@ -110,7 +112,7 @@ export default function Hero({ featuredPosts, projectId, dataset }) {
               <label
                 key={post._id}
                 htmlFor={post._id}
-                className="overflow-hidden"
+                className="overflow-hidden h-full lg:gap-2 lg:p-4"
               >
                 {selected === index && (
                   <motion.div
@@ -118,30 +120,10 @@ export default function Hero({ featuredPosts, projectId, dataset }) {
                     className="progress-bar absolute top-0 left-0 w-full h-[7px] bg-green-500 "
                   ></motion.div>
                 )}
-                <div className="circle relative w-1/4 ">
-                  {/* <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  version="1.1"
-                  viewBox="0 0 160 160"
-                  className="w-full "
-                >
-                  <circle cx="80" cy="80" r="70" strokeLinecap="round" />
-                </svg>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  version="1.1"
-                  viewBox="0 0 160 160"
-                  className="w-full absolute top-0 left-0"
-                >
-                  <circle
-                    className="circle-2"
-                    cx="80"
-                    cy="80"
-                    r="70"
-                    strokeLinecap="round"
-                  />
-                </svg> */}
-
+                {selected > index && (
+                  <div className="progress-bar absolute top-0 left-0 w-full h-[7px] bg-green-500 "></div>
+                )}
+                <div className="relative w-1/4 flex justify-center items-center">
                   <span className="button-text absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] font-extralight text-white opacity-90 text-5xl">
                     0{index + 1}
                   </span>
@@ -160,7 +142,10 @@ export default function Hero({ featuredPosts, projectId, dataset }) {
             );
           })}
         </div>
-        <div key={selected} className="content relative w-[100vw] h-[100vh] overflow-hidden">
+        <div
+          key={selected}
+          className="content relative w-[100vw] h-[100vh] overflow-hidden"
+        >
           {featuredPosts.map((post, index) => {
             const postTags = post.tags.map((tag) => tag);
             const articleImageUrl = post.mainImage
@@ -169,7 +154,10 @@ export default function Hero({ featuredPosts, projectId, dataset }) {
             return (
               <div
                 key={post.id}
-                className={`box ${post.id}  bg-cover bg-no-repeat bg-center flex items-end justify-start max-h-[70vh] translate-y-[0vh] lg:max-h-[115vh] lg:translate-y-[0vh]`}
+                className={clsx(`box ${post.id}  bg-cover bg-no-repeat bg-center flex items-end justify-start max-h-[70vh] translate-y-[0vh] lg:max-h-[115vh] lg:translate-y-[0vh]`, { 
+                  "z-10": selected === index,
+                  "z-[9]": prevSelected.current === index,
+                })}
                 style={{ backgroundImage: `url(${articleImageUrl})` }}
                 onTouchStart={handleTouchStart}
                 onTouchEnd={(e) => handleTouchEnd(e, index)}
