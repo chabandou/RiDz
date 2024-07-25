@@ -157,6 +157,8 @@ export default function Hero({ featuredPosts, projectId, dataset }) {
                 className={clsx(`box ${post.id}  bg-cover bg-no-repeat bg-center flex items-end justify-start max-h-[70vh] translate-y-[0vh] lg:max-h-[115vh] lg:translate-y-[0vh]`, { 
                   "z-10": selected === index,
                   "z-[9]": prevSelected.current === index,
+                  "animate-showContentRight": selected === index && (selected <= prevSelected.current),
+                  "animate-showContentLeft": selected === index && (selected > prevSelected.current) ,
                 })}
                 style={{ backgroundImage: `url(${articleImageUrl})` }}
                 onTouchStart={handleTouchStart}

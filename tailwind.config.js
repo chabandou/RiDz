@@ -69,10 +69,20 @@ export const theme = {
         from: { height: "var(--radix-accordion-content-height)" },
         to: { height: "0" },
       },
+      "showContentLeft": {
+        from: { clipPath: "circle(0% at 0% 50%)" },
+        to: { clipPath: "circle(130% at 0% 50%)" },
+      },
+      "showContentRight": {
+        from: { clipPath: "circle(0% at 100% 50%)" },
+        to: { clipPath: "circle(130% at 100% 50%)" },
+      },
     },
     animation: {
       "accordion-down": "accordion-down 0.2s ease-out",
       "accordion-up": "accordion-up 0.2s ease-out",
+      "showContentLeft": "showContentLeft 0.6s ease-in-out 1 forwards",
+      "showContentRight": "showContentRight 0.6s ease-in-out 1 forwards",
     },
   },
 };
