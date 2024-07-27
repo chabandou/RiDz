@@ -19,6 +19,9 @@ export default function AllNewsHeadlines({ posts, title, numberOfPosts }) {
     return `${pathname}?${params.toString()}`;
   };
   const numberOfPages = Math.ceil(numberOfPosts / 10);
+  // console.log(numberOfPages);
+  const finalNumberOfPages = numberOfPages ? numberOfPages : 1;
+
   const { replace } = useRouter();
 
   function handleClick(url) {
@@ -28,8 +31,8 @@ export default function AllNewsHeadlines({ posts, title, numberOfPosts }) {
   const allPages = generatePagination();
 
   return (
-    <div className="col-span-2 h-fit flex flex-col items-start justify-center gap-8">
-      <div className="flex items-center justify-start w-full border-r-8 border-primary pr-3">
+    <div className="col-span-2 flex flex-col items-start justify-center gap-8">
+      <div className="flex w-full items-start justify-start  border-r-8 border-primary pr-3">
         <h2 className="text-3xl font-bold text-right leading-[2.5rem]">
           {title}
         </h2>
@@ -49,13 +52,12 @@ export default function AllNewsHeadlines({ posts, title, numberOfPosts }) {
       <div className="w-full flex items-center justify-center gap-3 mt-12 mb-7">
         <Button
           className="rounded-lg"
-          
           onClick={() => handleClick(createPageURL(currentPage - 1))}
-          isDisabled={currentPage <= 1}
+          disabled={currentPage <= 1}
         >
           الصفحة السابقة
         </Button>
-        {Array.from({ length: numberOfPages }, (_, i) => (
+        {Array.from({ length: finalNumberOfPages }, (_, i) => (
           <Button
             key={i}
             className={clsx("rounded-lg ", {
@@ -71,7 +73,7 @@ export default function AllNewsHeadlines({ posts, title, numberOfPosts }) {
         <Button
           className="rounded-lg"
           onClick={() => handleClick(createPageURL(currentPage + 1))}
-          isDisabled={currentPage >= numberOfPages}
+          disabled={currentPage >= finalNumberOfPages}
         >
           الصفحة التالية
         </Button>

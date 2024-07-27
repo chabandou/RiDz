@@ -12,6 +12,7 @@ import SectionHeader from "./ui/SectionHeader";
 import { tagThings } from "@/constants";
 import BlurFade from "./magicui/blur-fade";
 import clsx from "clsx";
+import Tag from "./Tag";
 
 const projectId = "chgbiwcm";
 const dataset = "production";
@@ -20,8 +21,11 @@ const urlFor = (source) =>
     ? imageUrlBuilder({ projectId, dataset }).image(source)
     : null;
 
-
-export default async function Selection({ selectionPosts , title = "مُختارات", isArticlePage = false }) {
+export default async function Selection({
+  selectionPosts,
+  title = "مُختارات",
+  isArticlePage = false,
+}) {
   return (
     <div className="Selections-section relative flex flex-col items-center justify-center mx-auto sm:px-16 px-2 mt-2 gap-10 w-full mb-4">
       <Carousel
@@ -41,60 +45,62 @@ export default async function Selection({ selectionPosts , title = "مُختار
         </SectionHeader>
         <CarouselContent>
           {selectionPosts.map((post, index) => {
-            const {_id, name, slug, tags, mainImage} = post
+            const { _id, name, slug, tags, mainImage } = post;
             const articleImageUrl = mainImage
-            ? urlFor(mainImage)?.width(350).height(350).url()
-            : null;
+              ? urlFor(mainImage)?.width(350).height(350).url()
+              : null;
             const tag = tags.filter(
               (tag) =>
                 tag !== "selection" &&
                 tag !== "featured" &&
                 tag !== "cars" &&
-                tag !== "new" &&
-                tag !== "upcoming-events" &&
                 tag !== "news" &&
                 tag !== "essay"
             )[0];
             return (
               <CarouselItem
                 key={index}
-                className={clsx("basis-[80%] lg:basis-[33%] ", isArticlePage ? "xl:basis-[25%]" : "xl:basis-[20%]")}
+                className={clsx(
+                  "basis-[80%] lg:basis-[33%] ",
+                  isArticlePage ? "xl:basis-[25%]" : "xl:basis-[20%]"
+                )}
               >
-              <BlurFade key={index} delay={index * 0.1} inView className="">
-                <div className="">
-                  <Card
-                    key={_id}
-                    className="flex items-center justify-center rounded-lg overflow-hidden shadow-md h-[350px] w-full border-none"
-                  >
-                    <div
-                      className="card-body bg-cover bg-center text-white h-full w-full"
-                      style={{
-                        backgroundImage:
-                          `url(${articleImageUrl})` || "/car_3tww.png",
-                      }}
+                <BlurFade key={index} delay={index * 0.1} inView className="">
+                  <div className="">
+                    <Card
+                      key={_id}
+                      className="flex items-center justify-center rounded-lg overflow-hidden shadow-md h-[350px] w-full border-none"
                     >
-                      <Link
-                        href={`/news/article/${slug.current}`}
-                        className=" w-full h-full"
+                      <div
+                        className="card-body bg-cover bg-center text-white h-full w-full"
+                        style={{
+                          backgroundImage:
+                            `url(${articleImageUrl})` || "/car_3tww.png",
+                        }}
                       >
-                        <div className="bg-gradient-to-t from-[#000000] to-80% flex flex-col justify-center h-full w-full transition-all duration-300 ">
-                          <CardHeader className="flex flex-col justify-between items-start h-full">
-                            <div className="bg-slate-500 bg-opacity-20 backdrop-blur-sm border border-white border-opacity-45 text-white text-xs px-2 py-1 lg:text-sm lg:px-4 lg:py-2 rounded-full flex items-center gap-2 w-fit">
-                              <span className="{tag} capitalize">
-                                {tagThings[tag]?.translation || tag}
-                              </span>
-                            </div>
+                        <Link
+                          href={`/news/article/${slug.current}`}
+                          className=" w-full h-full"
+                        >
+                          <div className="bg-gradient-to-t from-[#000000] to-80% flex flex-col justify-center h-full w-full transition-all duration-300 ">
+                            <CardHeader className="flex flex-col justify-between items-start h-full">
+                              <Tag
+                                tag={tagThings[tag]?.translation || tag}
+                                className={
+                                  "bg-slate-500/20 border border-white/45 text-white"
+                                }
+                              />
 
-                            <CardTitle className="leading-7">
-                              {name}
-                            </CardTitle>
-                          </CardHeader>
-                        </div>
-                      </Link>
-                    </div>
-                  </Card>
-                </div>
-              </BlurFade>
+                              <CardTitle className="leading-7">
+                                {name}
+                              </CardTitle>
+                            </CardHeader>
+                          </div>
+                        </Link>
+                      </div>
+                    </Card>
+                  </div>
+                </BlurFade>
               </CarouselItem>
             );
           })}

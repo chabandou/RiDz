@@ -4,7 +4,7 @@ import AllNewsHeadlines from "./AllNewsHeadlines";
 import { tagThings } from "@/constants";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
-export default function CategoryTabs({ posts, params, allPosts }) {
+export default function CategoryTabs({ posts, params, numberOfPosts }) {
     const pathname = usePathname();
     const searchParams = useSearchParams();
     const currentPage = Number(searchParams.get('page')) || 1;
@@ -19,6 +19,8 @@ export default function CategoryTabs({ posts, params, allPosts }) {
       }
       replace(`${pathname}?${params.toString()}`, { scroll: false });
     }
+
+
 
   const title = tagThings[params.tag]?.translation;
 
@@ -50,14 +52,14 @@ export default function CategoryTabs({ posts, params, allPosts }) {
           مقالات
         </TabsTrigger>
       </TabsList>
-      <TabsContent value="news" className="w-fit h-full grid grid-cols-1">
-        <AllNewsHeadlines posts={newsPosts} title={`كل أخبار ${title}`} allPosts={allPosts} />
+      <TabsContent value="news" className="w-fit h-full grid grid-cols-1 data-[state=inactive]:hidden">
+        <AllNewsHeadlines posts={newsPosts} title={`كل أخبار ${title}`} numberOfPosts={numberOfPosts}  />
       </TabsContent>
       <TabsContent value="essay" className="w-full h-full grid grid-cols-1">
         <AllNewsHeadlines
           posts={essayPosts}
           title={`كل المقالات عن ${title}`}
-          allPosts={allPosts}
+          numberOfPosts={numberOfPosts}
         />
       </TabsContent>
     </Tabs>

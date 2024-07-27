@@ -4,22 +4,19 @@ import clsx from "clsx";
 import Image from "next/image";
 
 import { sanityFetch } from "@/app/sanity/client";
-import AllNewsHeadlines from "@/components/AllNewsHeadlines";
+import CategoryTabs from "@/components/CategoryTabs";
 import TrendingHeadlines from "@/components/TrendingHeadlines";
 import { tagThings } from "@/constants";
-import { Cat } from "lucide-react";
-import CategoryTabs from "@/components/CategoryTabs";
 
 export default async function Category({ params, searchParams }) {
-  const title = tagThings[params.tag].translation;
+  const title = tagThings[params.tag]?.translation;
 
   const page = Number(searchParams.page) || 1;
-  const type = searchParams.type;
-  const QUERY = `*[_type == "article" && "${params.tag}" in tags && "${type}" in tags][${page - 1 * 5}...${(page * 5)}]{_id, name, description, mainImage, slug, tags, publishedAt, readingTime}`;
+  const type = searchParams.type || "news";
+  const QUERY = `*[_type == "article" && "${params.tag}" in tags && "${type}" in tags][${(page - 1) * 5}...${(page * 5)}]{_id, name, description, mainImage, slug, tags, publishedAt, readingTime}`;
   const posts = await sanityFetch({ query: QUERY });
   const countQuery = `*[_type == "article" && "${params.tag}" in tags && "${type}" in tags]{_id, name, description, mainImage, slug, tags, publishedAt, readingTime}`;
-  const allPosts = await sanityFetch({ query: `count(${countQuery})` });
-  // console.log(allPosts);
+  const numberOfPosts = await sanityFetch({ query: `count(${countQuery})` });
  
 
 
@@ -29,7 +26,7 @@ export default async function Category({ params, searchParams }) {
         <div className="w-full h-full absolute bg-black bg-opacity-20"></div>
         <Image
           className="w-full h-full object-cover object-center "
-          src={tagThings[params.tag].img}
+          src={tagThings[params.tag]?.img}
           width={1920}
           height={1080}
           alt="car"
@@ -44,7 +41,7 @@ export default async function Category({ params, searchParams }) {
         </h1>
       </div>
       <section className="Latest-section relative w-full grid grid-cols-1 lg:grid-cols-3 mx-auto sm:px-16 px-6  mb-4">
-        <CategoryTabs params={params} posts={posts} allPosts={allPosts} />
+        <CategoryTabs params={params} posts={posts} numberOfPosts={numberOfPosts} />
           <TrendingHeadlines />
       </section>
     </main>

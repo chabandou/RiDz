@@ -4,6 +4,8 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CTA from "@/components/CTA";
+import MobileTabMenu from "@/components/MobileTabMenu";
+import clsx from "clsx";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,8 +17,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="ar">
-      <body className={notoKufiArabic.className}>
+      <body className={clsx(notoKufiArabic.className, "relative")}>
         <Navbar />
+        <MobileTabMenu />
         {children}
         <CTA />
         <Footer />

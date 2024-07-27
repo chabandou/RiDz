@@ -13,6 +13,7 @@ import {
   CardTitle,
 } from "./ui/card";
 import ReadingTime from "./ReadingTime";
+import Tag from "./Tag";
 
 const projectId = "chgbiwcm";
 const dataset = "production";
@@ -24,6 +25,15 @@ const urlFor = (source) =>
 export default function BlogHealineCard({ post, className, index }) {
   const { name, publishedAt, mainImage, description, tags, slug, readingTime } =
     post;
+
+  const postTag = tags?.filter(
+    (tag) =>
+      tag !== "selection" &&
+      tag !== "featured" &&
+      tag !== "cars" &&
+      tag !== "news"
+  )[0];
+
   const articleImageUrl = mainImage
     ? urlFor(mainImage)?.width(550).height(310).url()
     : null;
@@ -70,19 +80,12 @@ export default function BlogHealineCard({ post, className, index }) {
         </CardHeader>
 
         <CardFooter className="flex gap-2 pt-3 lg:pt-0 pb-0 ps-0 ">
-          <div className="bg-green-400 bg-opacity-10 backdrop-blur-sm border-opacity-45 text-green-700 text-xs px-2 py-1 lg:text-sm lg:px-4 lg:py-2 rounded-full flex items-center gap-2 w-fit">
-            <span className="{tag} capitalize">
-              {
-                tags?.filter(
-                  (tag) =>
-                    tag !== "selection" &&
-                    tag !== "featured" &&
-                    tag !== "cars" &&
-                    tag !== "new"
-                )[0]
-              }
-            </span>
-          </div>
+            <Link
+              href={`/news/category/${postTag}`}
+              className="{tag} capitalize"
+            >
+              <Tag tag={postTag} className={"bg-green-400 bg-opacity-10  border-opacity-45 text-green-700"} />
+            </Link>
           <Circle
             size={10}
             className="text-xl opacity-40"

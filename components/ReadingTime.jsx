@@ -3,7 +3,7 @@ import { Clock } from "lucide-react";
 export default function ReadingTime({ readingTime, className }) {
   return (
     <div className={`text-xs md:text-sm ${className}`}>
-                  {readingTime &&
+                 ~ {readingTime &&
                     (readingTime < 3 ? (
                       readingTime === 1 ? (
                         <span>دقيقة</span>

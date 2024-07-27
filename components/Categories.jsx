@@ -10,13 +10,13 @@ export default function Categories() {
     <div className="categories-section h-fit lg:h-fit relative flex flex-col items-center justify-center mx-auto sm:px-16 px-2 mt-2 gap-10 w-full mb-4">
       <SectionHeader title="تصفح التصنيفات" />
       <div className="w-full grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-3">
-        {Object.entries(tagThings).map(([tag, { translation, img }]) => {
+        {Object.entries(tagThings).map(([tag, { translation, img }], index) => {
           if (tag !== "featured" && tag !== "new" && tag !== "popular") {
             return (
               <Link
                 key={tag}
                 href={`/news/category/${tag}`}
-                className="group relative h-36 flex items-center justify-center lg:text-base rounded-lg overflow-hidden "
+                className={`group  relative h-36 flex items-center justify-center lg:text-base rounded-lg overflow-hidden`}
               >
                 <Card
                   className=" w-full h-full bg-transparent hover:bg-white hover:bg-opacity-80 hover:backdrop-blur-sm   flex items-center justify-center transition-all duration-300 hover:border-green-600"
