@@ -5,7 +5,7 @@ export default function Home() {
     <main className="flex h-fit flex-col items-center justify-between p-3 lg:p-24">
       <div className="flex h-fit flex-col items-center justify-center gap-3 bg-green-100/60 rounded-lg px-6 py-3">
         <Image
-          src="/under-construction.png"
+          src="/under-construction.svg"
           alt="Under Construction"
           width={1024}
           height={1024}
