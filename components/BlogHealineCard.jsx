@@ -14,6 +14,7 @@ import {
 } from "./ui/card";
 import ReadingTime from "./ReadingTime";
 import Tag from "./Tag";
+import { tagThings } from "@/constants";
 
 const projectId = "chgbiwcm";
 const dataset = "production";
@@ -84,7 +85,7 @@ export default function BlogHealineCard({ post, className, index }) {
               href={`/news/category/${postTag}`}
               className="{tag} capitalize"
             >
-              <Tag tag={postTag} className={"bg-green-400 bg-opacity-10  border-opacity-45 text-green-700"} />
+              <Tag tag={tagThings[postTag] ? tagThings[postTag].translation : postTag} className={"bg-green-400 bg-opacity-10  border-opacity-45 text-green-700"} />
             </Link>
           <Circle
             size={10}
