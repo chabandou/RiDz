@@ -15,7 +15,6 @@ import clsx from "clsx";
 import { Circle, Eye, MessageSquareText } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import next from "next";
 import Tag from "@/components/Tag";
 
 export const revalidate = +(process.env.NEXT_REVALIDATION_TIME || 0) || 60;
@@ -66,7 +65,6 @@ const SampleImageComponent = ({ value, isInline }) => {
         // Display alongside text if image appears inside a block text span
         display: isInline ? "inline-block" : "block",
 
-        // Avoid jumping around with aspect-ratio CSS property
         objectFit: "cover",
         objectPosition: "center",
         aspectRatio: 16 / 9,
