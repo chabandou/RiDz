@@ -11,23 +11,23 @@ export default function SocialMediaShare({ title }) {
   const [isCopied, setIsCopied] = useState(false);
   const [firstTime, setFirstTime] = useState(true);
   const pathname = usePathname();
-  const currentUrl = `https://ridz.vercel.app${pathname}`;
+  const currentUrl = `https://ri-dz.vercel.app${pathname}`;
 
   const shareLinks = {
     Facebook: {
-      url: `https://www.facebook.com/sharer/sharer.php?u=https://ridz.vercel.app${encodeURIComponent(pathname)}&title=${title}`,
+      url: `https://www.facebook.com/sharer/sharer.php?u=https://ri-dz.vercel.app${encodeURIComponent(pathname)}&title=${title}`,
     },
     Yourube: {
-      url: `https://www.yourube.com/share/article?url=https://ridz.vercel.app${encodeURIComponent(pathname)}`,
+      url: `https://www.yourube.com/share/article?url=https://ri-dz.vercel.app${encodeURIComponent(pathname)}`,
     },
     Twitter: {
-      url: `https://twitter.com/share?url=https://ridz.vercel.app${pathname}&text=${title}`,
+      url: `https://twitter.com/share?url=https://ri-dz.vercel.app${pathname}&text=${title}`,
     },
     Instagram: {
-      url: `https://www.instagram.com/share/url?url=https://ridz.vercel.app${encodeURIComponent(pathname)}&text=Check%20this%20out!`,
+      url: `https://www.instagram.com/share/url?url=https://ri-dz.vercel.app${encodeURIComponent(pathname)}&text=Check%20this%20out!`,
     },
     WhatsApp: {
-      url: `whatsapp://send?text=https://ridz.vercel.app${pathname}&text=${title}`,
+      url: `whatsapp://send?text=https://ri-dz.vercel.app${pathname}&text=${title}`,
     },
   };
 

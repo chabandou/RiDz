@@ -19,8 +19,6 @@ import Selection from "@/components/Selection";
 import LatestNews from "../../../components/LatestNews";
 import Categories from "@/components/Categories";
 import UpcomingEvents from "@/components/UpcomingEvents";
-import CTA from "@/components/CTA";
-import NewHero from "@/components/NewHero";
 
 export default async function News({}) {
   // Sanity Posts fetching
@@ -34,15 +32,13 @@ export default async function News({}) {
   const SLIDE_COUNT = 6;
   const SLIDES = Array.from(Array(SLIDE_COUNT).keys());
 
-  //   console.log(featuredPosts);
   return (
     <main className="flex flex-col gap-12 max-w-[1920px] mx-auto" dir="rtl">
       <Hero featuredPosts={featuredPosts} projectId={projectId} dataset={dataset} />
-      {/* <NewHero featuredPosts={featuredPosts} projectId={projectId} dataset={dataset} /> */}
       <Selection selectionPosts={selectionPosts} />
       <LatestNews posts={newsPosts} />
-      {/* <Categories /> */}
-      {/* <UpcomingEvents posts={upcomingPosts} slides={SLIDES} options={OPTIONS} projectId={projectId} dataset={dataset} /> */}
+      <Categories />
+      <UpcomingEvents posts={upcomingPosts} slides={SLIDES} options={OPTIONS} projectId={projectId} dataset={dataset} />
     </main>
   );
 }

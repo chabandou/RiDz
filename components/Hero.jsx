@@ -53,19 +53,19 @@ export default function Hero({ featuredPosts, projectId, dataset }) {
     }
   };
 
-  // useEffect(() => {
-  //   const autoPlay = () => {
-  //     if (selected === featuredPosts.length - 1) {
-  //       prevSelected.current = selected;
-  //       setSelected(0);
-  //     } else {
-  //       prevSelected.current = selected;
-  //       setSelected(selected + 1);
-  //     }
-  //   };
-  //   const interval = setInterval(autoPlay, 5500);
-  //   return () => clearInterval(interval);
-  // }, [featuredPosts.length, selected]);
+  useEffect(() => {
+    const autoPlay = () => {
+      if (selected === featuredPosts.length - 1) {
+        prevSelected.current = selected;
+        setSelected(0);
+      } else {
+        prevSelected.current = selected;
+        setSelected(selected + 1);
+      }
+    };
+    const interval = setInterval(autoPlay, 5500);
+    return () => clearInterval(interval);
+  }, [featuredPosts.length, selected]);
 
   function anim(variants, index) {
     return {
