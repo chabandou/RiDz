@@ -117,7 +117,7 @@
 }
 
 .tagBg-green {
-  background: rgba(21, 128, 60, 0.906);
+  background: rgba(21, 128, 60, 0.5);
 }
 .tagBg-gold {
   background: hwb(51 0% 30%);

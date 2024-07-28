@@ -2,11 +2,11 @@
 
 import clsx from "clsx";
 import { motion } from "framer-motion";
-import { Car } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { Button } from "./ui/button";
+import Logo from "./Logo";
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -47,26 +47,7 @@ export default function Navbar() {
     >
       <nav className="max-w-[1920px] text-base xl:text-lg mx-auto flex justify-center md:justify-between items-center sm:px-16 px-6 py-5 ">
         <Link href="/" className="flex justify-center items-center z-20">
-          <Car
-            width={40}
-            height={40}
-            fill="#16a34a"
-            color="#16a34a"
-            className={clsx({
-              flex: pathname === "/news",
-              hidden: pathname !== "/news",
-            })}
-          />
-          <Car
-            width={40}
-            height={40}
-            fill="#15803d"
-            color="#15803d"
-            className={clsx({
-              flex: pathname !== "/news",
-              hidden: pathname === "/news",
-            })}
-          />
+          <Logo color={pathname === "/news" ? "#16a34a" : "#15803d"} width={65} height={40} />
           <span
             className={clsx("text-3xl font-extrabold ml-2", {
               "text-green-600 ": pathname === "/news",
@@ -102,7 +83,7 @@ export default function Navbar() {
         </div>
       </nav>
       {pathname === "/news" && (
-        <div className=" absolute top-0 left-0 w-full h-full bg-gradient-to-b from-black to-transparent opacity-50 z-0"></div>
+        <div className=" absolute top-0 left-0 w-full h-full bg-gradient-to-b from-black/80 to-transparent opacity-50 z-0"></div>
       )}
     </header>
   );

@@ -3,19 +3,16 @@ import Link from "next/link";
 import { footerLinks } from "@/constants";
 import clsx from "clsx";
 import { buttonVariants } from "./ui/button";
+import Logo from "./Logo";
 
 export default function Footer() {
   return (
-    <footer className="flex flex-col text-white-100 border-t border-gray-600 bg-black bg-opacity-95">
-      <div className="flex max-md:flex-col flex-wrap justify-between gap-5 sm:px-16 px-6 py-10">
-        <div className="flex flex-col justify-start items-start gap-6">
-          <Image
-            src="/logo.svg"
-            alt="RiDz logo"
-            width={118}
-            height={18}
-            className="object-contain"
-          />
+    <footer className=" flex flex-col text-white-100 border-t border-gray-600 bg-black bg-opacity-95">
+      <div className="relative flex max-md:flex-col flex-wrap justify-between gap-5 sm:px-16 px-6 py-10">
+        <div className=" flex flex-col justify-start items-start gap-6">
+        <Logo color="white" className="absolute top-0 left-0 z-10 h-1/4 md:h-full xl:h-[calc(100%+120px)] opacity-5 -translate-x-1/4 xl:-translate-x-1/3  xl:-translate-y-[40px]"  />
+        <Logo color="white" className="w-32 h-18 -ms-1"  />
+
           <p className="text-base text-gray-100">
             RiDz 2024 <br />
             All Rights Reserved &copy;

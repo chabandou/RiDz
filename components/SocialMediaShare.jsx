@@ -6,7 +6,6 @@ import { ClipboardCheck, LinkIcon } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import BlurFade from "./magicui/blur-fade";
 
 export default function SocialMediaShare({ title }) {
   const [isCopied, setIsCopied] = useState(false);
@@ -14,7 +13,6 @@ export default function SocialMediaShare({ title }) {
   const pathname = usePathname();
   const currentUrl = `https://ridz.vercel.app${pathname}`;
 
-  console.log(pathname);
   const shareLinks = {
     Facebook: {
       url: `https://www.facebook.com/sharer/sharer.php?u=https://ridz.vercel.app${encodeURIComponent(pathname)}&title=${title}`,

@@ -67,26 +67,26 @@ export default function CTA() {
   }
   const [isSubmitted, setIsSubmitted] = useState(false);
   return (
-    <section className="CTA-section relative w-full h-[90vh] md:h-[80vh] lg:h-[90vh] grid grid-cols-1 gap-2" dir="rtl">
+    <section className="CTA-section relative w-full h-[50vh] md:h-[60vh] xl:h-[90vh] grid grid-cols-1 gap-2" dir="rtl">
       <div className="w-full h-full overflow-hidden absolute top-0 left-0 -z-10">
         <Image
-          src="/CTA-newsletter2.jpg"
+          src="/CTA-newsletter3.jpg"
           className=" w-full h-full object-cover object-bottom"
           width={1024}
           height={1024}
           alt="CTA"
         />
       </div>
-      <div className="w-full h-full flex flex-col items-center justify-between gap-12 pt-12 text-white">
-        <div className="flex flex-col items-center justify-center text-center gap-4">
-          <h2 className="text-4xl md:text-5xl  font-bold drop-shadow-[0_1px_1px_rgba(0,0,0,0.25)]">
-            ابقَ في المقدمة
+      <div className="w-full h-full flex flex-col items-center justify-between md:gap-12  text-white">
+        <div className="w-full h-full flex flex-col items-center justify-start text-center gap-4 pt-4 md:pt-12 bg-[hsl(0,0%,8%,0.75)] md:bg-transparent">
+          <h2 className="text-4xl md:text-5xl font-bold drop-shadow-[0_1px_1px_rgba(0,0,0,0.25)]">
+            إبقَ في المقدمة
           </h2>
-          <p className="text-lg  text-opacity-70 font-bold drop-shadow-[0_1px_1px_rgba(0,0,0,0.25)]">
+          <p className="text-lg xl:text-xl md:pt-2  text-opacity-70 font-bold drop-shadow-[0_1px_1px_rgba(0,0,0,0.25)]">
             انضم إلى مجتمع عشاق السيارات
           </p>
         </div>
-        <div className="w-full  flex flex-col items-center justify-center text-center gap-8 pt-12 pb-12 backdrop-blur-sm border-t-2 border-[#e6e6e659]">
+        <div className="w-full  flex flex-col items-center justify-center text-center gap-8 pt-12 pb-12 bg-[hsl(0,0%,8%,0.75)] md:bg-[hsl(0,0%,8%,0.85)] md:backdrop-blur-sm ">
           <AnimatePresence mode="wait">
             <motion.div
               initial="hidden"
@@ -106,7 +106,7 @@ export default function CTA() {
                 isSubmitted ? "hidden" : "block"
               )}
             >
-              <p className="text-xl lg:w-[75ch]  text-opacity-70 font-bold drop-shadow-[0_1px_1px_rgba(0,0,0,0.25)]">
+              <p className="px-2 -mb-3 lg:px-0 text-sm md:text-lg xl:text-xl lg:w-[75ch]  text-opacity-70 font-bold drop-shadow-[0_1px_1px_rgba(0,0,0,0.25)]">
                 لتصلك آخر الأخبار المتعلقة بالسيارات الجزائرية مباشرة على صندوق
                 بريدك الالكتروني سجل لتنظم إلى قائمة المتلقين
               </p>

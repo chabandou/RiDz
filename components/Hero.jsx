@@ -98,7 +98,7 @@ export default function Hero({ featuredPosts, projectId, dataset }) {
           />
         ))}
         <div
-          className="buttons absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-[120px] xl:h-[140px] xl:mt-16 flex items-center justify-center bg-[hsl(0,_0%,_8%)] z-50"
+          className="buttons absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-[120px] xl:h-[140px] xl:mt-16 flex items-center justify-center bg-[hsl(0,0%,8%,0.85)] backdrop-blur-sm z-50"
           dir="rtl"
         >
           {featuredPosts.map((post, index) => {
@@ -138,7 +138,9 @@ export default function Hero({ featuredPosts, projectId, dataset }) {
           className="content relative w-[100vw] h-[calc(85vh-120px)] xl:h-full flex transition-all overflow-hidden"
         >
           {featuredPosts.map((post, index) => {
-            const postTags = post.tags.filter( (tag) => tag !== "selection" && tag !== "news" && tag !== "essay");
+            const postTags = post.tags.filter(
+              (tag) => tag !== "selection" && tag !== "news" && tag !== "essay"
+            );
             const articleImageUrl = post.mainImage
               ? urlFor(post.mainImage)?.width(2560).height(1440).url()
               : null;
@@ -172,47 +174,47 @@ export default function Hero({ featuredPosts, projectId, dataset }) {
                 >
                   <div className="flex justify-between items-center">
                     <div className="flex gap-2">
-                      {postTags.slice(0, 3).map((tag) =>
-                       { if (tag === "featured") {
-                         return (
-                          tagThings[tag] && (
-                            <Tag
-                              key={tag}
-                              tag={
-                                tagThings[tag]
-                                  ? tagThings[tag].translation
-                                  : tag
-                              }
-                              icon={tagThings[tag]?.icon}
-                              className={clsx(
-                                `bg-slate-500/65 border border-white/45 text-white`,
-                                tagThings[tag]?.color &&
-                                  `tagBg-${tagThings[tag]?.color}`
-                              )}
-                            />
-                          )
-                        )
-                       } else {
-                        return (
-                          <Link key={tag} href={`/news/category/${tag}`}>
-                            <Tag
-                              key={tag}
-                              tag={
-                                tagThings[tag]
-                                  ? tagThings[tag].translation
-                                  : tag
-                              }
-                              icon={tagThings[tag]?.icon}
-                              className={clsx(
-                                `bg-slate-500/55 border border-white/45 text-white`,
-                                tagThings[tag]?.color &&
-                                  `tagBg-${tagThings[tag]?.color}`
-                              )}
-                            />
-                          </Link>
-                        )
-                       } }
-                      )}
+                      {postTags.slice(0, 3).map((tag) => {
+                        if (tag === "featured") {
+                          return (
+                            tagThings[tag] && (
+                              <Tag
+                                key={tag}
+                                tag={
+                                  tagThings[tag]
+                                    ? tagThings[tag].translation
+                                    : tag
+                                }
+                                icon={tagThings[tag]?.icon}
+                                className={clsx(
+                                  `bg-slate-500 bg-opacity-5 border border-white/45 text-white`,
+                                  tagThings[tag]?.color &&
+                                    `tagBg-${tagThings[tag]?.color}`
+                                )}
+                              />
+                            )
+                          );
+                        } else {
+                          return (
+                            <Link key={tag} href={`/news/category/${tag}`}>
+                              <Tag
+                                key={tag}
+                                tag={
+                                  tagThings[tag]
+                                    ? tagThings[tag].translation
+                                    : tag
+                                }
+                                icon={tagThings[tag]?.icon}
+                                className={clsx(
+                                  `bg-slate-500 bg-opacity-35 border border-white/45 text-white`,
+                                  tagThings[tag]?.color &&
+                                    `tagBg-${tagThings[tag]?.color}`
+                                )}
+                              />
+                            </Link>
+                          );
+                        }
+                      })}
                     </div>
                   </div>
                   <div className="flex flex-col justify-items-start items-start gap-2 xl:gap-6">
