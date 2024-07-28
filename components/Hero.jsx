@@ -98,7 +98,7 @@ export default function Hero({ featuredPosts, projectId, dataset }) {
           />
         ))}
         <div
-          className="buttons absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-[120px] xl:h-[140px] xl:mt-16 flex items-center justify-center bg-[hsl(0,0%,8%,0.85)] backdrop-blur-sm z-50"
+          className="buttons absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-[120px] xl:h-[140px] xl:mt-16 flex items-center justify-center bg-[hsl(0,0%,8%,0.85)] backdrop-blur-sm z-40"
           dir="rtl"
         >
           {featuredPosts.map((post, index) => {
