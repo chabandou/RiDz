@@ -182,9 +182,9 @@ export const footerLinks = [
   {
     title: "إتصل بنا",
     links: [
-      { title: <Mail className="w-4 h-4" />, url: "chabandou@gmail.com" },
+      { title: <Mail className="w-4 h-4" />, url: "digitalfootprintsw@gmail.com" },
       { title: <PhoneCall className="w-4 h-4" />, url: "+213 6846363" },
-      { title: <MapPin className="w-4 h-4" />, url: "Toggourt, Algeria" },
+      { title: <MapPin className="w-4 h-4" />, url: "Algeria" },
     ],
   },
 ];
