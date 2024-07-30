@@ -27,7 +27,7 @@ export default async function Selection({
   isArticlePage = false,
 }) {
   return (
-    <div className="Selections-section relative flex flex-col items-center justify-center mx-auto sm:px-16 px-2 mt-2 gap-10 w-full mb-4">
+    <div className="Selections-section relative flex flex-col items-center justify-center mx-auto sm:px-16  mt-2 gap-10 w-full mb-4">
       <Carousel
         opts={{
           loop: true,
@@ -37,13 +37,13 @@ export default async function Selection({
             "(min-width: 1024px)": { align: "start" },
           },
         }}
-        className=" max-w-full xl:w-full mx-auto space-y-8"
+        className=" max-w-full xl:w-full mx-auto space-y-8 h-"
       >
-        <SectionHeader title={title}>
+        <SectionHeader title={title} className="mx-2">
           <CarouselNext className="hidden lg:flex left-0 top-0 translate-x-12" />
           <CarouselPrevious className="hidden lg:flex left-0 top-0" />
         </SectionHeader>
-        <CarouselContent>
+        <CarouselContent className="h-fit">
           {selectionPosts.map((post, index) => {
             const { _id, name, slug, tags, mainImage } = post;
             const articleImageUrl = mainImage
@@ -65,11 +65,10 @@ export default async function Selection({
                   isArticlePage ? "xl:basis-[25%]" : "xl:basis-[20%]"
                 )}
               >
-                <BlurFade key={index} delay={index * 0.1} inView className="">
-                  <div className="">
+                <BlurFade key={index} delay={index * 0.1} inView className="h-full w-full flex" carouselItem yOffset={8} inViewMargin="-8px">
                     <Card
                       key={_id}
-                      className="flex items-center justify-center rounded-lg overflow-hidden shadow-md h-[350px] w-full border-none"
+                      className="flex items-center justify-center rounded-lg overflow-hidden shadow-md h-[350px] w-full border-none "
                     >
                       <div
                         className="card-body bg-cover bg-center text-white h-full w-full"
@@ -99,7 +98,6 @@ export default async function Selection({
                         </Link>
                       </div>
                     </Card>
-                  </div>
                 </BlurFade>
               </CarouselItem>
             );

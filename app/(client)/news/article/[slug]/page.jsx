@@ -67,7 +67,8 @@ const SampleImageComponent = ({ value, isInline }) => {
 
         objectFit: "cover",
         objectPosition: "center",
-        aspectRatio: 16 / 9,
+        width,
+        height,
       }}
       width={1920}
       height={1080}
@@ -120,17 +121,17 @@ export default async function ArticlePage({ params }) {
   };
   return (
     <>
-      <main className="overflow-x-hidden" dir="rtl">
+      <main className="overflow-x-hidden " dir="rtl">
         <section className="container mx-auto grid gap-12 p-2">
           <div className="relative w-full h-fit grid items-top gap-12 ">
-            <div className=" flex flex-col justify-center space-y-4">
-              <BlurFade inView className="w-full h-fit">
+            <div className=" flex flex-col justify-center space-y-4 ">
+              <BlurFade inView className="w-full h-fit" carouselItem yOffset={8}>
                 <Image
                   src={
                     articleImageUrl || "https://via.placeholder.com/1920x1080"
                   }
                   alt={name || "article"}
-                  className="mx-auto aspect-video h-[33vh] xl:h-[85vh] drop-shadow-lg scale-105 overflow-hidden md:rounded-xl object-cover object-center sm:w-full mb-2 md:mb-8"
+                  className="mx-auto aspect-video h-[33vh] xl:h-[85vh] drop-shadow-lg scale-105 overflow-hidden md:rounded-xl object-cover object-center sm:w-full mb-2 xl:mt-2 md:mb-8"
                   height="1080"
                   width="1920"
                 />
