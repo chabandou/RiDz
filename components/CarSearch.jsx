@@ -2,9 +2,9 @@ import { fetchCars } from "@/lib/utils";
 import CarsSearchBar from "./CarsSearchBar";
 
 export async function CarSearch({ searchParams }) {
-
   return (
     <section
+      id="catalogue"
       className="w-full flex flex-col justify-center items-start gap-4 xl:gap-7 mt-4 mb-2 px-4 "
       dir="rtl"
     >

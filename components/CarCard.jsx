@@ -21,7 +21,7 @@ export default function CarCard({ car }) {
     };
 
     fetchImageUrl();
-  }, []);
+  }, [car]);
 
   const carPrice = city_mpg * (year / 2005 + 1) * 1000;
 
@@ -53,6 +53,7 @@ export default function CarCard({ car }) {
             alt="car model"
             className="object-contain  rounded-2xl "
             fill
+            sizes="(100vw, 100vh)"
             priority
           />
         ) : (

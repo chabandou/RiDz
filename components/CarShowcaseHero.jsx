@@ -1,7 +1,19 @@
+"use client";
+
 import Image from "next/image";
 import { Button } from "./ui/button";
+import { ArrowLeft } from "lucide-react";
 
 export default function CarShowcaseHero() {
+  function handleScroll() {
+    const element = document.getElementById("catalogue");
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+
+    return false;
+  }
+
   return (
     <section
       className="flex flex-col xl:flex-row w-full xl:h-[90vh] justify-center items-center gap-4 xl:gap-14 mt-4 mb-4 px-4"
@@ -16,7 +28,7 @@ export default function CarShowcaseHero() {
           تصفح السيارات المتوفرة في السوق وتعرف على تصاميمها وخصائصها بكل بساطة
           عبر موقعنا و اجعل عملية شراء سيارتك القادمة سهلاً و مدروساً.
         </p>
-        <Button className="mt-5">استكشف السيارات</Button>
+        <Button className="mt-5 rounded-full text-lg flex justify-between group active:scale-95" size="lg" onClick={handleScroll}><span>استكشف السيارات</span><ArrowLeft size={20} className="-translate-x-[6px] group-hover:-translate-x-[11px] transition-all duration-300 ease-out" /></Button>
       </div>
       <div className="relative w-full flex justify-end items-end h-full">
         <div className="w-[90%] xl:w-[90%] h-full py-16 xl:py-8 flex items-center">
