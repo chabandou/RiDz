@@ -1,19 +1,17 @@
 "use client";
 
 import Image from "next/image";
-import { Fragment, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
+  DialogTrigger
 } from "@/components/ui/dialog";
 
 import { generateCarImageUrl } from "@/lib/utils";
-import { Button } from "./ui/button";
+import { Button, buttonVariants } from "./ui/button";
+import clsx from "clsx";
 
 export default function CarDetails({ car, isOpen, closeModal }) {
   const [imageUrl, setImageUrl] = useState([""]);
@@ -28,14 +26,14 @@ export default function CarDetails({ car, isOpen, closeModal }) {
     };
 
     fetchImageUrl();
-  }, []);
+  }, [ car ]);
 
   return (
     <div>
       <Dialog>
         <div className="w-[55vw] md:w-[35vw] xl:w-[18vw] absolute bottom-8 left-1/2 -translate-x-1/2 z-10 items-center justify-center mx-auto hidden group-hover:flex">
           <DialogTrigger style={{ width: "100%" }}>
-            <Button className="w-full bg-[#058c42ff]">الخصائص</Button>
+            <span className={clsx(buttonVariants({ variant: "default" }), "w-full bg-[#058c42ff]")}>الخصائص</span>
           </DialogTrigger>
         </div>
         <DialogContent className="w-[90vw] rounded-lg py-4 px-2">

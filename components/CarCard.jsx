@@ -1,10 +1,9 @@
 "use client";
 
 import { generateCarImageUrl } from "@/lib/utils";
-import { useEffect, useState } from "react";
-import { Button } from "./ui/button";
+import { LoaderPinwheel } from "lucide-react";
 import Image from "next/image";
-import { LoaderIcon, LoaderPinwheel } from "lucide-react";
+import { useEffect, useState } from "react";
 import CarDetails from "./CarDetails";
 
 export default function CarCard({ car }) {

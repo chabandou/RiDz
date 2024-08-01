@@ -1,4 +1,3 @@
-import { fetchCars } from "@/lib/utils";
 import CarsSearchBar from "./CarsSearchBar";
 
 export async function CarSearch({ searchParams }) {
