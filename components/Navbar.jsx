@@ -21,7 +21,7 @@ export default function Navbar() {
         onMouseEnter={() => setSelectedLink(href)}
         onMouseLeave={() => setSelectedLink(pathname)}
         href={href}
-        className={clsx(" group transition-all hover:text-green-500  px-6", {
+        className={clsx(" group transition-all hover:text-green-500 md:px-4  xl:px-6", {
           "text-primary ": activeCondition(href, pathname),
         })}
       >
@@ -47,7 +47,8 @@ export default function Navbar() {
     >
       <nav className="max-w-[1920px] text-base xl:text-lg mx-auto flex justify-center md:justify-between items-center sm:px-16 px-6 py-5">
         <Link href="/" className="flex justify-center items-center z-20 transition-all duration-300 ease-out">
-          <Logo color={pathname === "/news" ? "#16a34a" : pathname === "/" ? "white" : "#15803d"} width={65} height={40} />
+          <Logo color={pathname === "/news" ? "#16a34a" : pathname === "/" ? "white" : "#15803d"} width={65} height={40} className="hidden xl:flex" />
+          <Logo color={pathname === "/news" ? "#16a34a" : "#15803d"} width={65} height={40} className="flex xl:hidden" />
           <span
             className={clsx("text-3xl font-extrabold ml-2 transition-all duration-300 ease-out", {
               "text-green-600 ": pathname === "/news",

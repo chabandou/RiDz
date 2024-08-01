@@ -38,7 +38,7 @@ export function CustomFilter({ title, options, prm }) {
             {selected ? selected.title : title} <ChevronsUpDown size={20} />
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent className={`w-[50vw]`}>
+        <DropdownMenuContent className={`w-[50vw] xl:w-[18vw]`}>
           <DropdownMenuLabel className="" dir="rtl">
             {title}
           </DropdownMenuLabel>

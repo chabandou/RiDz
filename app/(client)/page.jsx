@@ -14,10 +14,11 @@ export default async function Home({ searchParams }) {
   });
 
   return (
-    <main className="flex h-fit flex-col items-center justify-between py-3 lg:px-12  ">
+    <main className="w-full flex h-fit flex-col items-center justify-between py-3 lg:px-12  ">
       <CarShowcaseHero />
       <CarSearch searchParams={searchParams} />
-      <CarCatalogue AllCars={AllCars} />
+      <CarCatalogue AllCars={AllCars} searchParams={searchParams} />
     </main>
   );
 }
+

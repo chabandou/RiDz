@@ -279,3 +279,61 @@
 .hero__image-overlay {
   background-image: url("/hero-bg.png");
 }
+
+
+/* ------------------------ ANIMATED GRADIENT BACKGROUND ----------------------------- */
+
+
+.Algeria {
+  background: linear-gradient(to right, #058c42ff 10%, #be0000, rgb(246, 246, 246), #058c42ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  animation: background-pan 2.5s ease-in-out infinite;
+  animation-delay: 1.5s;
+  background-size: 200%;
+  width: fit-content;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  position: relative;
+}
+
+@keyframes background-pan {
+  from {
+    background-position: 0% center;
+  }
+  to {
+    background-position: -200% center;
+  }
+}
+
+
+.Algeria::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100px;
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    white 50%,
+    white 100%
+  );
+  background-size: 400%;
+  background-position: 0% center;
+  display: block;
+  margin-top: 1rem;
+  animation: background-forward 1.2s ease-in-out 1;
+}
+
+@keyframes background-forward {
+  from {
+    background-position: 70% center;
+  }
+  to {
+    background-position: 0% center;
+  }
+}

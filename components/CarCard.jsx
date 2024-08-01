@@ -5,9 +5,9 @@ import { useEffect, useState } from "react";
 import { Button } from "./ui/button";
 import Image from "next/image";
 import { LoaderIcon, LoaderPinwheel } from "lucide-react";
+import CarDetails from "./CarDetails";
 
 export default function CarCard({ car }) {
-  console.log(car);
   const { city_mpg, year, make, model, transmission, drive } = car;
   const carImageUrl = generateCarImageUrl(car);
 
@@ -29,7 +29,7 @@ export default function CarCard({ car }) {
 
   return (
     <div
-      className="flex flex-col p-6 justify-center items-start text-gray-800 bg-green-100/40 hover:bg-white hover:shadow-md rounded-3xl group"
+      className="relative w-full flex flex-col p-6 justify-center items-start text-gray-800 bg-green-100/40 hover:bg-white hover:shadow-md rounded-3xl group"
       key={key}
     >
       <div className="w-full flex justify-between items-start gap-2">
@@ -46,16 +46,18 @@ export default function CarCard({ car }) {
           : carPrice}
         <span className="self-end text-[14px] font-medium ">MSRP</span>
       </p>
-      <div className="relative w-full h-44 my-3 oject-contain bg-white  border-2 border-primary rounded-2xl flex justify-center items-center">
+      <div className="relative w-[80%] mx-auto h-44 my-3 object-contain scale-110 bg-white  border-2 border-primary group-hover:border-transparent rounded-2xl flex justify-center items-center">
         {imageUrl ? (
           <Image
             src={imageUrl}
             alt="car model"
-            className="object-contain scale-110  border-2 border-primary rounded-2xl group-hover:border-transparent"
+            className="object-contain  rounded-2xl "
             fill
             priority
           />
-        ) : <LoaderPinwheel size={40}  className="animate-spin text-primary"/>}
+        ) : (
+          <LoaderPinwheel size={40} className="animate-spin text-primary" />
+        )}
       </div>
 
       <div className="relative flex w-full mt-2">
@@ -95,24 +97,14 @@ export default function CarCard({ car }) {
           </div>
         </div>
 
-        <div className="hidden group-hover:flex absolute bottom-0 w-full z-10">
-          <Button
-            className="w-full py-[16px] rounded-full bg-[#058c42ff] text-white text-[14px] font-bold leading-[17px]"
-            handleClick={() => {
-              setIsOpen(true);
-            }}
-          >
-            {" "}
-            Afficher plus{" "}
-          </Button>
-        </div>
+     
       </div>
 
-      {/* <CarDetails
+      <CarDetails
           isOpen={isOpen}
           car={car}
           closeModal={() => setIsOpen(false)}
-        /> */}
+        />
     </div>
   );
 }

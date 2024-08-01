@@ -5,7 +5,7 @@ export async function CarSearch({ searchParams }) {
 
   return (
     <section
-      className="w-full flex flex-col justify-center items-center gap-4 xl:gap-14 mt-4 mb-4 px-4 "
+      className="w-full flex flex-col justify-center items-start gap-4 xl:gap-7 mt-4 mb-2 px-4 "
       dir="rtl"
     >
       <div className="flex flex-col justify-center items-start gap-4">
