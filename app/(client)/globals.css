@@ -271,3 +271,11 @@
     transition: transform 0.4s ease-in-out;
   }
 }
+
+/* -------------------------- CARS PAGE -------------------------- */
+
+/* -------------------------- HERO -------------------------- */
+
+.hero__image-overlay {
+  background-image: url("/hero-bg.png");
+}

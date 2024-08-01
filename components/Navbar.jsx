@@ -45,13 +45,14 @@ export default function Navbar() {
         "text-white": pathname === "/news",
       })}
     >
-      <nav className="max-w-[1920px] text-base xl:text-lg mx-auto flex justify-center md:justify-between items-center sm:px-16 px-6 py-5 ">
-        <Link href="/" className="flex justify-center items-center z-20">
-          <Logo color={pathname === "/news" ? "#16a34a" : "#15803d"} width={65} height={40} />
+      <nav className="max-w-[1920px] text-base xl:text-lg mx-auto flex justify-center md:justify-between items-center sm:px-16 px-6 py-5">
+        <Link href="/" className="flex justify-center items-center z-20 transition-all duration-300 ease-out">
+          <Logo color={pathname === "/news" ? "#16a34a" : pathname === "/" ? "white" : "#15803d"} width={65} height={40} />
           <span
-            className={clsx("text-3xl font-extrabold ml-2", {
+            className={clsx("text-3xl font-extrabold ml-2 transition-all duration-300 ease-out", {
               "text-green-600 ": pathname === "/news",
-              "text-green-700": pathname !== "/news",
+              "xl:text-white text-green-700": pathname === "/",
+              "text-green-700": pathname !== "/news" && pathname !== "/",
             })}
           >
             RiDz
